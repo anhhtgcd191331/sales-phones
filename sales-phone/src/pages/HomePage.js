@@ -1,12 +1,13 @@
 import React from "react";
-import Navbar from "../components/NavBar/Navbar";
+import Layout from "../components/Layout/Layout";
 import SliderShow from "../components/Slider/SliderShow";
 
 function HomePage() {
   return (
     <div>
-      <Navbar />
-      <SliderShow />
+      <Layout>
+        <SliderShow />
+      </Layout>
     </div>
   );
 }
