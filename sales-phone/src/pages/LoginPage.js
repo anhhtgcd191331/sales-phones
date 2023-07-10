@@ -1,13 +1,12 @@
 import React from "react";
+import Layout from "../components/Layout/Layout";
 import Login from "../components/Login/Login";
-import Navbar from "../components/NavBar/Navbar";
 
 function LoginPage() {
   return (
-    <div>
-      <Navbar />
+    <Layout>
       <Login />
-    </div>
+    </Layout>
   );
 }
 

@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import { UserSignupReducer } from "./reduces/UserReduces";
+import { UserSigninReducer, UserSignupReducer } from "./reduces/UserReduces";
 
 const initialState = {
   userSignin: {
@@ -13,13 +13,11 @@ const initialState = {
       ? JSON.parse(localStorage.getItem("cartItems"))
       : [],
   },
-  //   shippingAddress: localStorage.getItem('shippingAddress')
-  //   ? JSON.parse(localStorage.getItem('shippingAddress'))
-  //   : {},
 };
 
 const reducer = combineReducers({
   userSignup: UserSignupReducer,
+  userSignin: UserSigninReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

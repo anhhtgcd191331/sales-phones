@@ -1,6 +1,15 @@
+.login-container {
+    border: 1px solid #d70018;
+    border-radius: 20px;
+    width: 30%;
+    margin: 50px auto;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
 .login-page {
-    position: absolute;
-    width: 500px;
+    position: relative;
+    width: 100%;
     top: 30%;
     left: 50%;
     transform: translate(-50%, 0%);
@@ -11,6 +20,7 @@
     align-items: center;
 
     margin-top: 1rem;
+    margin-bottom: 100px;
 }
 
 .form-login {
@@ -19,7 +29,7 @@
     justify-content: center;
     align-items: center;
 
-    width: 100%;
+    width: 80%;
     height: 100%;
 }
 
