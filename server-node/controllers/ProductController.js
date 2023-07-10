@@ -115,6 +115,20 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 });
 
+const deleteProduct = asyncHandler(async (req, res) => {
+  try {
+    const product = await ProductModel.findById(req.params);
+    if (product) {
+      await ProductModel.deleteOne(product);
+      res.json({ message: "Product delete successfully" });
+    } else {
+      res.json({ message: "Product not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 const filterProductByType = asyncHandler(async (req, res) => {
   try {
     const filterProductByType = await ProductModel.find({
@@ -133,4 +147,5 @@ export {
   addProduct,
   updateProduct,
   filterProductByType,
+  deleteProduct,
 };
