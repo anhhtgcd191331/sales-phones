@@ -88,13 +88,49 @@ const updateProduct = asyncHandler(async (req, res) => {
       product.name = name || product.name;
       product.amount = amount || product.amount;
       product.price = price || product.price;
+      product.salePrice = salePrice || product.salePrice;
+      product.type = type || product.type;
+      product.os = os || product.os;
+      product.ram = ram || product.ram;
       product.image = result?.secure_url || product.image;
       product.rating = product.rating;
       product.cloulinary_id = result?.public_id || product.cloudinary_id;
+      product.battery = battery || product.battery;
+      product.rom = rom || product.rom;
+      product.camera = camera || product.camera;
+      product.special = special || product.special;
+      product.design = design || product.design;
+      product.screen = screen || product.screen;
+
+      const updateProduct = await product.save();
+      if (updateProduct) {
+        res.json(updateProduct);
+      }
+    } else {
+      res.status(404);
+      throw new Error("User not found");
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 });
 
-export { getAllProduct, getProductById, addProduct };
+const filterProductByType = asyncHandler(async (req, res) => {
+  try {
+    const filterProductByType = await ProductModel.find({
+      type: req.params.type,
+    }).limit(5);
+
+    res.json(filterProductByType);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+export {
+  getAllProduct,
+  getProductById,
+  addProduct,
+  updateProduct,
+  filterProductByType,
+};
