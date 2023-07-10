@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db/db.js";
 import { errorHandler } from "./middlewares/errorMiddleware.js";
 import UserRouter from "./routers/UserRouter.js";
+import ProductRouter from "./routers/ProductRouter.js";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.get("", (req, res) => {
 });
 
 app.use("/api/users", UserRouter);
+app.use("/api/products", ProductRouter);
 
 app.use(errorHandler);
 
