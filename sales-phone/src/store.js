@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { UserSigninReducer, UserSignupReducer } from "./reduces/UserReduces";
+import { ChatReducer } from "./reduces/ChatReducer";
 
 const initialState = {
   userSignin: {
@@ -18,6 +19,7 @@ const initialState = {
 const reducer = combineReducers({
   userSignup: UserSignupReducer,
   userSignin: UserSigninReducer,
+  chat: ChatReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
