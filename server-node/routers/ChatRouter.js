@@ -8,6 +8,6 @@ import {
 const ChatRouter = express.Router();
 ChatRouter.get("/", getAllConversation);
 ChatRouter.get("/message", getMessageByConversation);
-ChatRouter.post("save", postSaveMessage);
+ChatRouter.post("/save", postSaveMessage);
 
 export default ChatRouter;

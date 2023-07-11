@@ -63,6 +63,7 @@ function AppChat() {
           message,
           idConversation: conversation._id,
         };
+        console.log(payload);
         const { data } = await axios.post(
           "http://localhost:5000/api/chats/save",
           payload

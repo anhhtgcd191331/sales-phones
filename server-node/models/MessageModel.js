@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 
-const Message = mongoose.Schema(
+const Schema = mongoose.Schema;
+const MessageSchema = new Schema(
   {
     idConversation: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "conversation",
     },
     sender: {
@@ -23,4 +24,4 @@ const Message = mongoose.Schema(
   }
 );
 
-export default mongoose.model("message", Message);
+export const MessageModel = mongoose.model("message", MessageSchema);

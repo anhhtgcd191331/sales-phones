@@ -1,7 +1,6 @@
 import React from "react";
 
-function ListMessage(props) {
-  const { messages, user } = props;
+function ListMessage({ messages, user }) {
   return (
     <div className="chatuser-listmessage">
       {messages.map((message) => (

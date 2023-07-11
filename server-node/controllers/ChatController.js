@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
 import ConversationModel from "../models/ConversationModel.js";
-import MessageModel from "../models/MessageModel.js";
+import { MessageModel } from "../models/MessageModel.js";
 
 const getAllConversation = asyncHandler(async (req, res) => {
   try {
@@ -15,25 +15,24 @@ const getAllConversation = asyncHandler(async (req, res) => {
 
 const getMessageByConversation = asyncHandler(async (req, res) => {
   try {
-    ConversationModel.findOne({
+    const user = await ConversationModel.findOne({
       $or: [{ idUser: req.query.idUser }, { _id: req.query.idConversation }],
-    }).then((user) => {
-      if (!user) return;
+    }).exec();
 
-      MessageModel.find({
-        idConversation: user._id,
-      })
-        .populate("idConversation")
-        .exec((err, messages) => {
-          if (!messages) {
-            return res.status(400).json({
-              message: "Failed",
-            });
-          }
-          return res.status(200).json({
-            messageList: messages,
-          });
-        });
+    if (!user) {
+      return res.status(400).json({
+        message: "Failed",
+      });
+    }
+
+    const messages = await MessageModel.find({
+      idConversation: user._id,
+    })
+      .populate("idConversation")
+      .exec();
+
+    return res.status(200).json({
+      messageList: messages,
     });
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -48,7 +47,7 @@ const postSaveMessage = asyncHandler(async (req, res) => {
       idConversation: req.body.idConversation,
     });
     const createMessage = await messageText.save();
-    res.json(createMessage);
+    res.send(createMessage);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
