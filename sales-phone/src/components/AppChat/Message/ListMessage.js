@@ -1,10 +1,12 @@
 import React from "react";
 
-function ListMessage({ messages, user }) {
+function ListMessage(props) {
+  const { messages, user } = props;
   return (
     <div className="chatuser-listmessage">
-      {messages.map((message) => (
+      {messages.map((message, i) => (
         <div
+          key={i}
           className={
             user.name === message.sender
               ? "chatuser-listmessage-message me"

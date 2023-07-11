@@ -26,11 +26,10 @@ const getMessageByConversation = asyncHandler(async (req, res) => {
     }
 
     const messages = await MessageModel.find({
-      idConversation: user._id,
+      nameConversation: user.name,
     })
       .populate("idConversation")
       .exec();
-
     return res.status(200).json({
       messageList: messages,
     });

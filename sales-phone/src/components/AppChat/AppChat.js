@@ -97,7 +97,7 @@ function AppChat() {
       {openChat ? (
         <div className="chatuser">
           <div className="chatuser-user">
-            <span className="chatuser-user-name">Hoang Tien Anh</span>
+            <span className="chatuser-user-name">{userInfo.name}</span>
             <span
               className="chatuser-user-line"
               onClick={() => setOpenChat(!openChat)}
