@@ -1,6 +1,6 @@
 import axios from "axios";
 import queryString from "query-string";
-import { BASE_URL } from "../constants/UserConstant";
+import { BASE_URL } from "../constants/constants";
 
 export const axiosClient = axios.create({
   baseURL: BASE_URL,

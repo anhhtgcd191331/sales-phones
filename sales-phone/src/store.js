@@ -2,6 +2,9 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import { UserSigninReducer, UserSignupReducer } from "./reduces/UserReduces";
 import { ChatReducer } from "./reduces/ChatReducer";
+import { getAllProductReducer } from "./reduces/ProductReducer";
+import { SelectListReducer } from "./reduces/SelectListReducer";
+import { ListTypeProductReducer } from "./reduces/ListTypeProductReducer";
 
 const initialState = {
   userSignin: {
@@ -20,6 +23,9 @@ const reducer = combineReducers({
   userSignup: UserSignupReducer,
   userSignin: UserSigninReducer,
   chat: ChatReducer,
+  allProduct: getAllProductReducer,
+  selectList: SelectListReducer,
+  allTypeProduct: ListTypeProductReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

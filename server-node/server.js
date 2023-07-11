@@ -8,6 +8,7 @@ import UserRouter from "./routers/UserRouter.js";
 import ProductRouter from "./routers/ProductRouter.js";
 import ChatRouter from "./routers/ChatRouter.js";
 import { ConnectSocket } from "./config/socket/socket.js";
+import SelectListrouter from "./routers/SelectListRouter.js";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.get("", (req, res) => {
 app.use("/api/users", UserRouter);
 app.use("/api/products", ProductRouter);
 app.use("/api/chats", ChatRouter);
+app.use("/api/select-list", SelectListrouter);
 
 app.use(errorHandler);
 
