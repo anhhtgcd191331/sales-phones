@@ -18,8 +18,8 @@ function Navbar() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo, error } = userSignin;
   const [search, setSearch] = useState("");
-  // const cartItems = useSelector((state) => state.cart.cartItems);
-  // const amount = cartItems.reduce((a, b) => a + b.qty, 0);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const amount = cartItems.reduce((a, b) => a + b.qty, 0);
 
   const [menu, setMenu] = useState(true);
 
@@ -88,8 +88,8 @@ function Navbar() {
 
               {showAccount ? (
                 <div className="menu-drop">
-                  <Link to="register">Register</Link>
-                  <Link to="login">Login</Link>
+                  <Link to="/register">Register</Link>
+                  <Link to="/login">Login</Link>
                 </div>
               ) : (
                 ""
@@ -99,8 +99,7 @@ function Navbar() {
           <li className="shop-cart">
             <Link to="/cart" className="shop-cart">
               <AiOutlineShoppingCart style={{ fontSize: "30px" }} />
-              {/* <span className="count">{amount}</span> */}
-              <span className="count">2</span>
+              <span className="count">{amount}</span>
             </Link>
           </li>
         </ul>

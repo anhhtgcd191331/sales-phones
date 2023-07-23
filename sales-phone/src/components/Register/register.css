@@ -1,14 +1,14 @@
 .register-container {
     border: 1px solid #d70018;
     border-radius: 20px;
-    width: 30%;
+    width: 40%;
     margin: 50px auto;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .signup-page {
     position: relative;
-    width: 500px;
+    width: 80%;
     top: 30%;
     left: 48%;
     transform: translate(-50%, 0%);

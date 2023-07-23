@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import cloudinary from "../config/cloudinary/cloudinary.js";
 import ProductModel from "../models/ProductModel.js";
+import { PinComment } from "../untils/untils.js";
 
 const getAllProduct = asyncHandler(async (req, res) => {
   try {
@@ -141,6 +142,78 @@ const filterProductByType = asyncHandler(async (req, res) => {
   }
 });
 
+const RateProduct = asyncHandler(async (req, res) => {
+  try {
+    const product = await ProductModel.findById(req.params.id);
+    if (product) {
+      const existsUser = product.reviews.find((x) => x.name === req.body.name);
+      if (existsUser) {
+        res.json({ message: "You already rated this product" });
+      } else {
+        product.reviews.push(req.body);
+        const updateProduct = await product.save();
+        res.json(updateProduct);
+      }
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const CommentProduct = asyncHandler(async (req, res) => {
+  try {
+    const product = await ProductModel.findById(req.params.id);
+    if (product) {
+      product.comments.push(req.body);
+      const updateCommentProduct = await product.save();
+      res.send(updateCommentProduct);
+    } else {
+      res.status(400).send({ message: "product not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const RepCommentProduct = asyncHandler(async (req, res) => {
+  try {
+    const product = await ProductModel.findById(req.params.id);
+    if (product) {
+      const indexComment = product.comments.findIndex(
+        (item) => item._id == req.body.idComment
+      );
+      product.comments[indexComment].replies.push(req.body);
+
+      await product.save();
+      res.json(product);
+    } else {
+      res.status(400).json({ message: "product not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const PinCommentProduct = asyncHandler(async (req, res) => {
+  try {
+    const product = await ProductModel.findById(req.params.id);
+    if (product) {
+      const indexComment = product.comments.findIndex(
+        (item) => item._id == req.body.idComment
+      );
+      product.comments[indexComment] = req.body;
+      PinComment(product.comments, indexComment, 0);
+
+      await product.save();
+      res.send(product);
+    } else {
+      res.status(400).json({ message: "product not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 export {
   getAllProduct,
   getProductById,
@@ -148,4 +221,8 @@ export {
   updateProduct,
   filterProductByType,
   deleteProduct,
+  RateProduct,
+  CommentProduct,
+  RepCommentProduct,
+  PinCommentProduct,
 };

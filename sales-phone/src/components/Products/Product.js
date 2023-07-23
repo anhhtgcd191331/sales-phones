@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 // import { useDispatch } from "react-redux";
 import { message } from "antd";
 import { formatPrice } from "../../unitls";
+import { AddToCart } from "../../actions/CartAction";
+import { useDispatch } from "react-redux";
 
-function Product(props) {
-  const { product } = props;
-  // const dispatch = useDispatch();
+function Product({ product }) {
+  const dispatch = useDispatch();
 
   const success = () => {
     message.success({
@@ -24,8 +25,8 @@ function Product(props) {
   };
 
   const AddProductToCart = async (product) => {
-    // const action = AddToCart(product);
-    // await dispatch(action);
+    const action = AddToCart(product);
+    await dispatch(action);
     success();
   };
   return (
