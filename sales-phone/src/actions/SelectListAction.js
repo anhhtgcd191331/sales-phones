@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getAllSelectList = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("http://localhost:4000/selectList");
+    const { data } = await axios.get("http://localhost:5000/api/select-list");
     dispatch({ type: "GET_ALL_SELECT_LIST", payload: data });
   } catch (error) {}
 };
@@ -10,7 +10,7 @@ export const getAllSelectList = () => async (dispatch) => {
 export const CreateSelectListItem = (item) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:4000/selectList/create",
+      "http://localhost:5000/api/select-list/create",
       item
     );
     dispatch({ type: "CREATE_SELECT_LIST_ITEM", payload: data });
@@ -20,7 +20,7 @@ export const CreateSelectListItem = (item) => async (dispatch) => {
 export const UpdateSelectListItem = (item) => async (dispatch) => {
   try {
     const { data } = await axios.put(
-      `http://localhost:4000/selectList/update/${item._id}`,
+      `http://localhost:5000/api/select-list/update/${item._id}`,
       item
     );
     dispatch({ type: "UPDATE_SELECT_LIST_ITEM", payload: data });
@@ -30,7 +30,7 @@ export const UpdateSelectListItem = (item) => async (dispatch) => {
 export const getSelectListItemById = (id) => async (dispatch) => {
   try {
     const { data } = await axios.get(
-      `http://localhost:4000/selectList/detail/${id}`
+      `http://localhost:5000/api/select-list/detail/${id}`
     );
     dispatch({ type: "GET_SELECT_LIST_ITEM_BY_ID", payload: data });
   } catch (error) {}
@@ -39,7 +39,7 @@ export const getSelectListItemById = (id) => async (dispatch) => {
 export const deleteSelectListItemById = (id) => async (dispatch) => {
   try {
     const { data } = await axios.delete(
-      `http://localhost:4000/selectList/delete/${id}`
+      `http://localhost:5000/api/select-list/delete/${id}`
     );
     dispatch({ type: "DELETE_SELECT_LIST_ITEM_BY_ID", payload: data });
   } catch (error) {}

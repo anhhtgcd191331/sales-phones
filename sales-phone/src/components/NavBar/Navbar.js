@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import "./navbar.css";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BiSolidDownArrow } from "react-icons/bi";
 import { SignoutUser } from "../../actions/UserAction";
+import { searchProduct } from "../../actions/product/ProductAction";
+
 
 function Navbar() {
   const dispatch = useDispatch();
-  // const history = useHistory();
+  const navigate = useNavigate();
 
   const [showAccount, setShowAccount] = useState(false);
   const [showAccount2, setShowAccount2] = useState(false);
@@ -29,8 +31,8 @@ function Navbar() {
 
   const SearchProduct = async (e) => {
     e.preventDefault();
-    // await history.push("/search");
-    // dispatch(searchProduct(search));
+    navigate("/search");
+    dispatch(searchProduct(search));
     setSearch("");
   };
   return (

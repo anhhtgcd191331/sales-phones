@@ -1,12 +1,13 @@
 import React from "react";
 import "./cart.css";
 import { useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 import { formatPrice } from "../../unitls";
 import ListProductCart from "./ListProductCart";
 
-function Cart() {
-  //   const history = useHistory();
+function Cart(props) {
+  const location = useLocation();
   const cartItems = useSelector((state) => state.cart.cartItems);
   var userInfo = useSelector((state) => state.userSignin.userInfo);
   const totalPrice = cartItems.reduce(
@@ -16,7 +17,7 @@ function Cart() {
 
   const Order = () => {
     if (userInfo) {
-      //   history.push("/order");
+      window.location.href = "http://localhost:3000/order";
     } else {
       alert("ban can dang nhap");
       //   history.push("/login");

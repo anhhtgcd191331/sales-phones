@@ -6,8 +6,8 @@ function AllRepComment({ allrepcomment, showRepComment, id }) {
   return (
     <div className="all-comment-rep-list">
       <div className="arrow-up"></div>
-      {allrepcomment.map((repComment) => (
-        <div className="all-comment-rep-list-item">
+      {allrepcomment.map((repComment, i) => (
+        <div key={i} className="all-comment-rep-list-item">
           <div className="all-comment-info">
             {repComment.isAdmin ? (
               <div className="all-comment-info-name admin">

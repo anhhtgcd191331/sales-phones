@@ -1,14 +1,33 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import { UserSigninReducer, UserSignupReducer } from "./reduces/UserReduces";
+import {
+  getAllUserReducer,
+  UserSigninReducer,
+  UserSignupReducer,
+} from "./reduces/UserReduces";
 import { ChatReducer } from "./reduces/ChatReducer";
 import {
   getAllProductReducer,
   getProductByIdReducer,
+  searchProductReducer,
 } from "./reduces/ProductReducer";
-import { SelectListReducer } from "./reduces/SelectListReducer";
-import { ListTypeProductReducer } from "./reduces/ListTypeProductReducer";
+import {
+  SelectListReducer,
+  UpdateSelectListReducer,
+} from "./reduces/SelectListReducer";
+import {
+  ListTypeProductReducer,
+  TypeProductReducer,
+} from "./reduces/ListTypeProductReducer";
 import { CartReducer } from "./reduces/CartReducer";
+import {
+  addressReducer,
+  getAllOrderReducer,
+  getOrderByUserReducer,
+  OrderInfoReducer,
+  orderPayReducer,
+} from "./reduces/OrderReducer";
+import { InfoGhnReducer } from "./reduces/GhnReducer";
 
 const initialState = {
   userSignin: {
@@ -24,14 +43,32 @@ const initialState = {
 };
 
 const reducer = combineReducers({
-  userSignup: UserSignupReducer,
+  users: getAllUserReducer,
   userSignin: UserSigninReducer,
-  chat: ChatReducer,
+  userSignup: UserSignupReducer,
+
   allProduct: getAllProductReducer,
   getProductById: getProductByIdReducer,
-  selectList: SelectListReducer,
-  allTypeProduct: ListTypeProductReducer,
+
+  searchProduct: searchProductReducer,
+
   cart: CartReducer,
+
+  allOrder: getAllOrderReducer,
+  address: addressReducer,
+  orderByUser: getOrderByUserReducer,
+  orderInfo: OrderInfoReducer,
+  payOrder: orderPayReducer,
+
+  orderGhn: InfoGhnReducer,
+
+  chat: ChatReducer,
+
+  selectList: SelectListReducer,
+  updateSelect: UpdateSelectListReducer,
+
+  allTypeProduct: ListTypeProductReducer,
+  detailType: TypeProductReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

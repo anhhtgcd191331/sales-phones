@@ -9,6 +9,9 @@ import ProductRouter from "./routers/ProductRouter.js";
 import ChatRouter from "./routers/ChatRouter.js";
 import { ConnectSocket } from "./config/socket/socket.js";
 import SelectListrouter from "./routers/SelectListRouter.js";
+import ListTypeProductRouter from "./routers/ListTypeProductRouter.js";
+import OrderRouter from "./routers/OrderRouter.js";
+import PaymentRouter from "./routers/PaymentRouter.js";
 
 dotenv.config();
 
@@ -31,6 +34,12 @@ app.use("/api/users", UserRouter);
 app.use("/api/products", ProductRouter);
 app.use("/api/chats", ChatRouter);
 app.use("/api/select-list", SelectListrouter);
+app.use("/api/payment", PaymentRouter);
+app.use("/api/type-products", ListTypeProductRouter);
+app.use("/api/orders", OrderRouter);
+app.get("/api/config/paypal", (req, res) => {
+  res.send(process.env.PAYPAL_CLIENT_ID || "sb");
+});
 
 app.use(errorHandler);
 

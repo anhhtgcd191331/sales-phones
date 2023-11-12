@@ -10,7 +10,7 @@ function DetailPage() {
   return (
     <Layout>
       <Detail />
-      {userInfo ? <AppChat /> : null}
+      {userInfo && userInfo.isAdmin === false ? <AppChat /> : null}
       <Scroll />
     </Layout>
   );

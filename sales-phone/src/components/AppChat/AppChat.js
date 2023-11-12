@@ -22,7 +22,6 @@ function AppChat() {
       );
       setMessages(data.messageList);
     };
-
     getAllMessageByConversation();
   }, []);
 
@@ -90,7 +89,7 @@ function AppChat() {
     <div className="appchat">
       {openChat ? null : (
         <div className="openchat" onClick={() => setOpenChat(!openChat)}>
-          Chat với nhân viên
+          Chat with admin
         </div>
       )}
 

@@ -27,7 +27,7 @@ function Comment() {
       };
       dispatch(commentProduct(id, comment));
       setValue("");
-    } else alert("Đăng nhập đi bạn êiiiii");
+    } else alert("You have to login");
   };
   useEffect(() => {
     dispatch(getproductById(id));
@@ -59,7 +59,7 @@ function Comment() {
         </div>
       </Col>
 
-      <AllComment allComment={allComment}></AllComment>
+      <AllComment allComment={allComment} />
     </div>
   );
 }

@@ -31,3 +31,37 @@ export const SignoutUser = (user) => async (dispatch) => {
   dispatch({ type: "USER_SIGNOUT_SUCCESS", payload: {} });
   document.location.href = "/";
 };
+
+export const getAllUser = () => async (dispatch, getState) => {
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  try {
+    const { data } = await axios.get("http://localhost:5000/api/users", {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
+    dispatch({ type: "GET_ALL_USER", payload: data });
+  } catch (error) {
+    dispatch({ type: "GET_ALL_USER_FAIL", payload: error.message });
+  }
+};
+
+export const deleteUser = (userId) => async (dispatch, getState) => {
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  try {
+    const { data } = await axios.delete(
+      `http://localhost:5000/api/users/delete/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
+    dispatch({ type: "DELETE_USER", payload: data });
+  } catch (error) {
+    dispatch({ type: "DELETE_USER_FAIL", error: error.message });
+  }
+};

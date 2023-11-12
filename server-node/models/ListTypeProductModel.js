@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const CategorySchema = mongoose.Schema(
+const ListTypeProductSchema = mongoose.Schema(
   {
     name: String,
     img: String,
@@ -11,4 +11,4 @@ const CategorySchema = mongoose.Schema(
   }
 );
 
-export default mongoose.model("Category", CategorySchema);
+export default mongoose.model("ListTypeproduct", ListTypeProductSchema);

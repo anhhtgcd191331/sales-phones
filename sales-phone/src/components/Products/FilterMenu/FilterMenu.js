@@ -24,8 +24,8 @@ function FilterMenu() {
     dispatch(getAllTypeProduct());
   }, [dispatch]);
 
-  const filterMenuItemAntd = (item) => (
-    <div className="filter-menu-item">
+  const filterMenuItemAntd = (item, i) => (
+    <div key={i} className="filter-menu-item">
       <div
         className={
           dataFilter[`${item.property}`]
@@ -48,8 +48,9 @@ function FilterMenu() {
   const menuShow = (menuItem, arrItem) => (
     <div className="menu-show">
       <div className="menu-show-list">
-        {arrItem.map((item) => (
+        {arrItem.map((item, i) => (
           <div
+            key={i}
             className={`menu-show-item`}
             onClick={() => handleClickMenuShow(item, menuItem)}
           >
@@ -82,8 +83,9 @@ function FilterMenu() {
     setDataFilter(newDataFilter);
   };
 
-  const MenuFirmProduct = (item) => (
+  const MenuFirmProduct = (item, i) => (
     <div
+      key={i}
       className={
         dataFilter[`type`] === item.name
           ? `filter-menu-firm-item active`
@@ -108,12 +110,12 @@ function FilterMenu() {
   return (
     <div>
       <div className="filter-menu-firm">
-        {List ? List.map((item) => MenuFirmProduct(item)) : ""}
+        {List ? List.map((item, i) => MenuFirmProduct(item, i)) : ""}
       </div>
 
       <div className="filter-menu">
         {filterMenuList && filterMenuList.length > 0
-          ? filterMenuList.map((item) => filterMenuItemAntd(item))
+          ? filterMenuList.map((item, i) => filterMenuItemAntd(item, i))
           : ""}
       </div>
     </div>

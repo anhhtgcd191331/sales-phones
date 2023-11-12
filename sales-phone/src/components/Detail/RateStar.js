@@ -58,7 +58,7 @@ function RateStar() {
     setShowEvalute(true);
   };
   return (
-    <div className="">
+    <div>
       <Row>
         <Col span={18} xs={24} sm={24} md={24} style={{ minWidth: "100%" }}>
           <span className="rate-star-title">
@@ -86,7 +86,7 @@ function RateStar() {
                   >
                     sao trung bình
                   </p>
-                  <p
+                  <div
                     className="star-average-num"
                     style={{
                       marginBottom: 0,
@@ -103,7 +103,7 @@ function RateStar() {
                         paddingBottom: "3px",
                       }}
                     />
-                  </p>
+                  </div>
                 </Col>
                 <Col span={10}>
                   <li className="thongke">
@@ -113,7 +113,7 @@ function RateStar() {
                         style={{ color: "orange", margin: "0 5px" }}
                       />
                     </div>
-                    <p className="percent" style={{ display: "flex" }}>
+                    <div className="percent" style={{ display: "flex" }}>
                       <Progress
                         status="active"
                         percent={fiveStar}
@@ -125,7 +125,7 @@ function RateStar() {
                           fontSize: "15px",
                         }}
                       />
-                    </p>
+                    </div>
                   </li>
                   <li className="thongke">
                     <div className="numstar">
@@ -134,7 +134,7 @@ function RateStar() {
                         style={{ color: "orange", margin: "0 5px" }}
                       />
                     </div>
-                    <p className="percent" style={{ display: "flex" }}>
+                    <div className="percent" style={{ display: "flex" }}>
                       <Progress
                         status="active"
                         percent={fourStar}
@@ -146,7 +146,7 @@ function RateStar() {
                           fontSize: "15px",
                         }}
                       />
-                    </p>
+                    </div>
                   </li>
                   <li className="thongke">
                     <div className="numstar">
@@ -155,7 +155,7 @@ function RateStar() {
                         style={{ color: "orange", margin: "0 5px" }}
                       />
                     </div>
-                    <p className="percent" style={{ display: "flex" }}>
+                    <div className="percent" style={{ display: "flex" }}>
                       <Progress
                         status="active"
                         percent={threeStar}
@@ -167,7 +167,7 @@ function RateStar() {
                           fontSize: "15px",
                         }}
                       />
-                    </p>
+                    </div>
                   </li>
                   <li className="thongke">
                     <div className="numstar">
@@ -176,7 +176,7 @@ function RateStar() {
                         style={{ color: "orange", margin: "0 5px" }}
                       />
                     </div>
-                    <p className="percent" style={{ display: "flex" }}>
+                    <div className="percent" style={{ display: "flex" }}>
                       <Progress
                         status="active"
                         percent={twoStar}
@@ -188,7 +188,7 @@ function RateStar() {
                           fontSize: "15px",
                         }}
                       />
-                    </p>
+                    </div>
                   </li>
                   <li className="thongke">
                     <div className="numstar">
@@ -197,7 +197,7 @@ function RateStar() {
                         style={{ color: "orange", margin: "0 5px" }}
                       />
                     </div>
-                    <p className="percent" style={{ display: "flex" }}>
+                    <div className="percent" style={{ display: "flex" }}>
                       <Progress
                         status="active"
                         percent={oneStar}
@@ -209,7 +209,7 @@ function RateStar() {
                           fontSize: "15px",
                         }}
                       />
-                    </p>
+                    </div>
                   </li>
                 </Col>
                 {existsUser ? (
@@ -229,7 +229,7 @@ function RateStar() {
                       onClick={() => {
                         userInfo
                           ? setShowRate(true)
-                          : alert("Đăng nhập đi bạn eii");
+                          : alert("You have to login");
                       }}
                     >
                       {" "}
@@ -273,8 +273,8 @@ function RateStar() {
       </Row>
 
       <Row style={{ marginTop: "1rem" }}>
-        {product.reviews.map((item) => (
-          <Col span={18} align="start" xs={24} sm={24} md={18}>
+        {product.reviews.map((item, i) => (
+          <Col key={i} span={18} align="start" xs={24} sm={24} md={18}>
             <div className="danhgia">
               <p
                 className="name"

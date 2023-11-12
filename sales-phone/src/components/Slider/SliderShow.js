@@ -68,19 +68,34 @@ function SliderShow(props) {
               {...settings}
             >
               <div className="img-item-slider" key={1}>
-                <img src="https://cdn2.cellphones.com.vn/690x300,webp,q100/https://dashboard.cellphones.com.vn/storage/iphone-14-sliding-th7-new.png" />
+                <img
+                  src="https://cdn2.cellphones.com.vn/690x300,webp,q100/https://dashboard.cellphones.com.vn/storage/iphone-14-sliding-th7-new.png"
+                  alt=""
+                />
               </div>
               <div className="img-item-slider" key={2}>
-                <img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/1380-600-max.png" />
+                <img
+                  src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/1380-600-max.png"
+                  alt=""
+                />
               </div>
               <div className="img-item-slider" key={3}>
-                <img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/ip11-tg-690-300-max.png" />
+                <img
+                  src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/ip11-tg-690-300-max.png"
+                  alt=""
+                />
               </div>
               <div className="img-item-slider" key={4}>
-                <img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/dd690x300_XR.png" />
+                <img
+                  src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/dd690x300_XR.png"
+                  alt=""
+                />
               </div>
               <div className="img-item-slider" key={5}>
-                <img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/se-aw-690-300-max.png"></img>
+                <img
+                  src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/se-aw-690-300-max.png"
+                  alt=""
+                ></img>
               </div>
             </Slider>
             <div className="carousel-left-move" onClick={() => previous()}>
@@ -120,13 +135,22 @@ function SliderShow(props) {
         </div>
         <div className="carousel-right">
           <div className="carousel-right-item">
-            <img src="https://cdn2.cellphones.com.vn/690x300,webp,q10/https://dashboard.cellphones.com.vn/storage/s21-fe-right-banner-th7.png" />
+            <img
+              src="https://cdn2.cellphones.com.vn/690x300,webp,q10/https://dashboard.cellphones.com.vn/storage/s21-fe-right-banner-th7.png"
+              alt=""
+            />
           </div>
           <div className="carousel-right-item">
-            <img src="https://cdn2.cellphones.com.vn/690x300,webp,q10/https://dashboard.cellphones.com.vn/storage/ipadth7-new.png" />
+            <img
+              src="https://cdn2.cellphones.com.vn/690x300,webp,q10/https://dashboard.cellphones.com.vn/storage/ipadth7-new.png"
+              alt=""
+            />
           </div>
           <div className="carousel-right-item">
-            <img src="https://cdn2.cellphones.com.vn/690x300,webp,q10/https://dashboard.cellphones.com.vn/storage/msi%20gaming%20right%20banner.jpg" />
+            <img
+              src="https://cdn2.cellphones.com.vn/690x300,webp,q10/https://dashboard.cellphones.com.vn/storage/msi%20gaming%20right%20banner.jpg"
+              alt=""
+            />
           </div>
         </div>
       </div>

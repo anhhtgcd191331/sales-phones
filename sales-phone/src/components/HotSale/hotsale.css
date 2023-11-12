@@ -37,7 +37,7 @@ p {
 
 .hotsale-listproduct-product {
     position: relative;
-    width: 220px;
+    /* width: 220px; */
     height: 100%;
     text-align: center;
     padding: 2rem 1rem;

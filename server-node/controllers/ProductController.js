@@ -118,7 +118,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
 const deleteProduct = asyncHandler(async (req, res) => {
   try {
-    const product = await ProductModel.findById(req.params);
+    const product = await ProductModel.findById(req.params.id);
     if (product) {
       await ProductModel.deleteOne(product);
       res.json({ message: "Product delete successfully" });
@@ -129,6 +129,18 @@ const deleteProduct = asyncHandler(async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+const searchProduct = asyncHandler(async (req, res) => {
+  try {
+    const name = req.query.name;
+    const product = await ProductModel.find({
+      name : { $regex: name, $options: "i"},
+    })
+    product.length > 0 ? res.json(product) : res.json({message: "No found any product"})
+  } catch (error) {
+    res.status(400).json({message: error.message})
+  }
+})
 
 const filterProductByType = asyncHandler(async (req, res) => {
   try {
@@ -205,9 +217,59 @@ const PinCommentProduct = asyncHandler(async (req, res) => {
       PinComment(product.comments, indexComment, 0);
 
       await product.save();
-      res.send(product);
+      res.json(product);
     } else {
       res.status(400).json({ message: "product not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const BlogProduct = asyncHandler(async (req, res) => {
+  try {
+    const product = await ProductModel.findById({ _id: req.params.id });
+
+    if (product) {
+      product.blog = req.body.blogContent;
+      await product.save();
+      res.json(product);
+    } else {
+      res.json({ message: "product not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const PaginationProduct = asyncHandler(async (req, res) => {
+  const perPage = 4;
+  const page = parseInt(req.params.page) || 1;
+  try {
+    const products = await ProductModel.find({})
+      .skip(perPage * page - perPage)
+      .limit(perPage)
+      .exec();
+
+    const count = await ProductModel.countDocuments().exec();
+
+    res.json({
+      products: products,
+      current: page,
+      pages: Math.ceil(count / perPage),
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+const filterProductByRandomField = asyncHandler(async (req, res) => {
+  try {
+    const products = await ProductModel.find(req.body);
+    if (products) {
+      res.json(products);
+    } else {
+      res.json({ message: "product not found" });
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -221,8 +283,12 @@ export {
   updateProduct,
   filterProductByType,
   deleteProduct,
+  searchProduct,
   RateProduct,
   CommentProduct,
   RepCommentProduct,
   PinCommentProduct,
+  BlogProduct,
+  PaginationProduct,
+  filterProductByRandomField,
 };

@@ -14,27 +14,36 @@ const getAllConversation = asyncHandler(async (req, res) => {
 });
 
 const getMessageByConversation = asyncHandler(async (req, res) => {
-  try {
-    const user = await ConversationModel.findOne({
-      $or: [{ idUser: req.query.idUser }, { _id: req.query.idConversation }],
-    }).exec();
+  const { idUser, idConversation } = req.query;
 
-    if (!user) {
-      return res.status(400).json({
-        message: "Failed",
+  try {
+    const conversation = await ConversationModel.findOne({
+      $or: [{ idUser }, { _id: idConversation }],
+    });
+
+    if (!conversation) {
+      return res.json({
+        message: "Conversation not found.",
       });
     }
 
     const messages = await MessageModel.find({
-      nameConversation: user.name,
-    })
-      .populate("idConversation")
-      .exec();
+      idConversation: conversation._id,
+    }).populate("idConversation");
+
+    if (!messages.length) {
+      return res.status(400).json({
+        message: "No messages found for this conversation.",
+      });
+    }
+
     return res.status(200).json({
       messageList: messages,
     });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    return res.status(500).json({
+      message: "Internal server error.",
+    });
   }
 });
 
