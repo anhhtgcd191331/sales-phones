@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrder } from "../../../../actions/OrderAction";
 import ListOrder from "./ListOrder";
-
+import CircularProgress from "@mui/material/CircularProgress";
 function AdminOrderAll() {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.allOrder.order);
@@ -14,11 +14,11 @@ function AdminOrderAll() {
   }, []);
 
   return (
-    <div>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       {orders && orders.length > 0 ? (
         <ListOrder orders={orders}></ListOrder>
       ) : (
-        <h4>Không có đơn hàng</h4>
+        <CircularProgress style={{ margin: "auto" }} />
       )}
     </div>
   );

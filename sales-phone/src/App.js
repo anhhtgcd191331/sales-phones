@@ -25,7 +25,8 @@ import ShippingOrder from "./components/MyOrder/ShippingOrder/ShippingOrder";
 import PenddingOrder from "./components/MyOrder/PendingOrder/PenddingOrder";
 import ReviewProduct from "./components/Admin/components/ReviewProduct/ReviewProduct";
 import SearchPage from "./pages/SearchPage";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 function App() {
   const { userInfo } = useSelector((state) => state.userSignin);
   return (
@@ -40,7 +41,7 @@ function App() {
         <Route exact path="/detail/:id" element={<DetailPage />} />
         <Route exact path="/order" element={<OrderPage />} />
         <Route exact path="/orderSuccess" element={<OrderSuccessPage />} />
-        <Route exact path="/search" element={<SearchPage/>}/>
+        <Route exact path="/search" element={<SearchPage />} />
         <Route
           path="/admin/"
           element={

@@ -6,35 +6,34 @@ function Footer() {
     <section id="footer">
       <div className="footer">
         <div className="footer-top">
-          <div className="footer-top-name">
-            <h2>cellphones</h2>
-          </div>
           <div className="footer-top-about">
             <h2>about</h2>
             <ul>
               <li>
-                <a>Về Chúng Tôi</a>
+                <a>About us</a>
               </li>
               <li>
                 <a>Blog</a>
               </li>
               <li>
-                <a>Cơ Hội Nghề Nghiệp</a>
+                <a>Career opportunities</a>
               </li>
               <li>
-                <a>Cửa Hàng</a>
+                <a>Shop</a>
               </li>
-              <li>
-                <a>
-                  <img src="https://theme.hstatic.net/1000075078/1000610097/14/gov.png?v=664"></img>
-                </a>
-              </li>
+              
             </ul>
           </div>
           <div className="footer-top-sp">
             <h2>Always-on Support</h2>
-            <p>Support 028.71.087.088 (07:00-21:00)</p>
-            <p>Delivery 1800 6936 (07:00-21:00)</p>
+            <ul>
+              <li>
+                <a>Support 028.71.087.088 (07:00-21:00)</a>
+              </li>
+              <li>
+                <a>Delivery 1800 6936 (07:00-21:00)</a>
+              </li>
+            </ul>
           </div>
           <div className="footer-top-delivery">
             <h2>Delivery</h2>
@@ -52,6 +51,9 @@ function Footer() {
                 <a>Shipping methods</a>
               </li>
             </ul>
+          </div>
+          <div className="footer-top-delivery-image">
+              <img src="https://theme.hstatic.net/1000075078/1000610097/14/gov.png?v=664"></img>
           </div>
         </div>
         <div className="footer-bot">

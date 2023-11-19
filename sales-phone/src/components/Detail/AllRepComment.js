@@ -14,9 +14,7 @@ function AllRepComment({ allrepcomment, showRepComment, id }) {
                 <img src="https://cellphones.com.vn/skin/frontend/default/cpsdesktop/images/media/logo.png"></img>
               </div>
             ) : (
-              <div className="all-comment-info-name">
-                {getFirstCharacterUser(repComment.nameUser)}
-              </div>
+              <div className="all-comment-info-name">{getFirstCharacterUser(repComment.nameUser)}</div>
             )}
             {repComment.isAdmin ? (
               <strong>
@@ -30,11 +28,8 @@ function AllRepComment({ allrepcomment, showRepComment, id }) {
           <div className="all-comment-content">{repComment.content}</div>
 
           <div className="all-comment-more">
-            <a
-              className="all-comment-more-chat"
-              onClick={() => showRepComment(id)}
-            >
-              <AiOutlineWechat style={{ color: "#e11b1e" }} /> <p> Trả lời</p>
+            <a className="all-comment-more-chat" onClick={() => showRepComment(id)}>
+              <AiOutlineWechat style={{ color: "#e11b1e" }} /> <p>Reply</p>
             </a>
           </div>
         </div>

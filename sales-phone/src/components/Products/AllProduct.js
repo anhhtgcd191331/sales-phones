@@ -6,7 +6,7 @@ import { handlePercentDiscount } from "../../unitls";
 import FilterProduct from "./FilterProduct/FilterProduct";
 import ListPoducts from "./ListPoducts";
 import SortByPrice from "./SortByPrice/SortByPrice";
-
+import "./AllProduct.css";
 function AllProduct() {
   const dispatch = useDispatch();
 
@@ -25,9 +25,15 @@ function AllProduct() {
         <FilterProduct />
         <SortByPrice />
         {product && product.length > 0 ? (
-          <ListPoducts HotSaleProducts={handlePercentDiscount(product)} />
+          <>
+            <h3>Products</h3>
+            <ListPoducts HotSaleProducts={handlePercentDiscount(product)} />
+          </>
         ) : (
-          <span>Không có sản phẩm</span>
+          <div className="no-product">
+            <img src="/images/noproduct.webp" />
+            <span>No Product</span>
+          </div>
         )}
       </div>
     </section>

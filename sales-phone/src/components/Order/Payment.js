@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../../actions/OrderAction";
 import VnPay from "./VnPay";
 
-function Payment() {
+function Payment({ isVerified }) {
   const dispatch = useDispatch();
-  const [sdkReady, setSdkReady] = useState(false);
+  // const [sdkReady, setSdkReady] = useState(false);
   const [choosePay, setChoosePay] = useState({
     payLater: false,
     payOnline: false,
@@ -16,24 +16,24 @@ function Payment() {
   const { order } = useSelector((state) => state.orderInfo);
 
   const payLater = () => {
-    setChoosePay({ payOnline: false, payLater: true });
+    if (isVerified) setChoosePay({ payOnline: false, payLater: true });
   };
 
   const payOnline = () => {
-    setChoosePay({ payLater: false, payOnline: true });
+    if (isVerified) setChoosePay({ payLater: false, payOnline: true });
   };
 
-  const successPaymentHandler = async (paymentResult) => {
-    const OrderPaid = {
-      ...order,
-      status: "pendding",
-      paymentMethod: "payOnline",
-      paymentResult: { ...paymentResult },
-    };
-    await dispatch(createOrder(OrderPaid));
-    // history.push("/orderSuccess");
-    window.location.href = "http://localhost:3000/orderSuccess";
-  };
+  // const successPaymentHandler = async (paymentResult) => {
+  //   const OrderPaid = {
+  //     ...order,
+  //     status: "pendding",
+  //     paymentMethod: "payOnline",
+  //     paymentResult: { ...paymentResult },
+  //   };
+  //   await dispatch(createOrder(OrderPaid));
+  //   // history.push("/orderSuccess");
+  //   window.location.href = "http://localhost:3000/orderSuccess";
+  // };
 
   const SendOrderPayLater = async () => {
     const OrderPaid = {
@@ -47,45 +47,43 @@ function Payment() {
     window.location.href = "http://localhost:3000/orderSuccess";
   };
 
-  useEffect(() => {
-    const addPayPalScript = async () => {
-      const { data } = await axios.get(
-        "http://localhost:5000/api/config/paypal"
-      );
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
-      script.async = true;
-      script.onload = () => {
-        setSdkReady(true);
-      };
-      document.body.appendChild(script);
+  // useEffect(() => {
+  //   const addPayPalScript = async () => {
+  //     const { data } = await axios.get("http://localhost:5000/api/config/paypal");
+  //     const script = document.createElement("script");
+  //     script.type = "text/javascript";
+  //     script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
+  //     script.async = true;
+  //     script.onload = () => {
+  //       setSdkReady(true);
+  //     };
+  //     document.body.appendChild(script);
 
-      addPayPalScript();
-    };
-  }, []);
+  //     addPayPalScript();
+  //   };
+  // }, []);
   return (
     <div className="choose-pay">
-      <h4>CHỌN PHƯƠNG THỨC THANH TOÁN </h4>
+      <h4>SELECT A PAYMENT METHOD</h4>
       <div className="choose">
         <button
           type="submit"
           className={choosePay.payLater ? "active" : ""}
           onClick={() => payLater()}
         >
-          Thanh toán khi nhận hàng
+          Payment on delivery
         </button>
         <button
           type="submit"
           className={choosePay.payOnline ? "active" : ""}
           onClick={() => payOnline()}
         >
-          Thanh toán Online
+          Online Payment
         </button>
       </div>
       {choosePay.payLater ? (
         <div className="customer-order">
-          <button onClick={SendOrderPayLater}>Đặt Hàng</button>
+          <button onClick={SendOrderPayLater}>Order</button>
         </div>
       ) : null}
       {choosePay.payOnline ? (

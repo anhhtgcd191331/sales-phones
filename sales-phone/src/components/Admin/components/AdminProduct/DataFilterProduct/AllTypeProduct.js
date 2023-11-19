@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteTypeProduct,
-  getAllTypeProduct,
-} from "../../../../../actions/ListTypeProductAction";
+import { deleteTypeProduct, getAllTypeProduct } from "../../../../../actions/ListTypeProductAction";
 
 function AllTypeProduct() {
   const dispatch = useDispatch();
@@ -20,12 +17,9 @@ function AllTypeProduct() {
   };
 
   const MenuFirmProduct = (firmItem, i) => (
-    <div key={i} className="filter-menu-firm-item">
+    <div key={i} className="filter-menu-firm-item" style={{ overflow: "unset" }}>
       <img src={firmItem.img}></img>
-      <div
-        className="filter-menu-firm-item-delete"
-        onClick={() => handleRemoveItem(firmItem)}
-      >
+      <div className="filter-menu-firm-item-delete" onClick={() => handleRemoveItem(firmItem)}>
         <span className="icon-close">
           <AiOutlineClose />
         </span>
@@ -35,9 +29,7 @@ function AllTypeProduct() {
 
   return (
     <div>
-      <div className="filter-menu-firm">
-        {List ? List.map((item, i) => MenuFirmProduct(item, i)) : ""}
-      </div>
+      <div className="filter-menu-firm">{List ? List.map((item, i) => MenuFirmProduct(item, i)) : ""}</div>
     </div>
   );
 }

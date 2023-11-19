@@ -35,25 +35,37 @@ function Slide({ children }) {
           </Link>
         </div>
         <div className="sidebar-list">
-          <Link to="/admin" className={"sidebar-list-item"}>
+          <Link
+            to="/admin"
+            className={location.pathname.endsWith("/admin") ? "sidebar-list-item active" : "sidebar-list-item"}
+          >
             <span>
               <AiOutlineAppstore />
             </span>
             <p>Dashboard</p>
           </Link>
-          <Link to="/admin/user" className={"sidebar-list-item"}>
+          <Link
+            to="/admin/user"
+            className={location.pathname === "/admin/user" ? "sidebar-list-item active" : "sidebar-list-item"}
+          >
             <span>
               <AiOutlineUsergroupAdd />
             </span>
             <p>Users</p>
           </Link>
-          <Link to="/admin/product" className={"sidebar-list-item"}>
+          <Link
+            to="/admin/product"
+            className={location.pathname === "/admin/product" ? "sidebar-list-item active" : "sidebar-list-item"}
+          >
             <span>
               <AiOutlineShop />
             </span>
             <p>Products</p>
           </Link>
-          <Link to="/admin/order" className={"sidebar-list-item"}>
+          <Link
+            to="/admin/order"
+            className={location.pathname === "/admin/order" ? "sidebar-list-item active" : "sidebar-list-item"}
+          >
             <span>
               <AiOutlineUnorderedList />
             </span>
@@ -64,11 +76,7 @@ function Slide({ children }) {
           </Link>
           <Link
             to="/admin/chat"
-            className={
-              location.pathname === "/admin/chat"
-                ? "sidebar-list-item active"
-                : "sidebar-list-item"
-            }
+            className={location.pathname === "/admin/chat" ? "sidebar-list-item active" : "sidebar-list-item"}
           >
             <span>
               <AiOutlineWechat />

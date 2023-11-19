@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import {
-  CreateSelectListItem,
-  getAllSelectList,
-} from "../../../../../actions/SelectListAction";
+import { CreateSelectListItem, getAllSelectList } from "../../../../../actions/SelectListAction";
+import { message } from "antd";
 
 function CreateInfoFilter() {
   const dispatch = useDispatch();
@@ -29,9 +27,7 @@ function CreateInfoFilter() {
 
   const handleChangeValueOption = (option, e) => {
     const newListOption = [...addOption];
-    const index = newListOption.findIndex(
-      (item) => item.index === option.index
-    );
+    const index = newListOption.findIndex((item) => item.index === option.index);
 
     newListOption[index].value = e.target.value;
     setAddOption(newListOption);
@@ -44,6 +40,46 @@ function CreateInfoFilter() {
   };
 
   const onSubmit = async (data, e) => {
+    if (!data.name) {
+      message.error({
+        content: "Name is required!",
+        duration: 1,
+        className: "custom-class",
+        style: {
+          position: "absolute",
+          right: "2rem",
+          top: "20px",
+        },
+      });
+      return;
+    }
+    if (!data.property) {
+      message.error({
+        content: "Property is required!",
+        duration: 1,
+        className: "custom-class",
+        style: {
+          position: "absolute",
+          right: "2rem",
+          top: "20px",
+        },
+      });
+      return;
+    }
+    if (!addOption?.[0]?.value) {
+      message.error({
+        content: "Option is required!",
+        duration: 1,
+        className: "custom-class",
+        style: {
+          position: "absolute",
+          right: "2rem",
+          top: "20px",
+        },
+      });
+      return;
+    }
+    console.log("addOption", addOption);
     const options = createArrayOption([...addOption]);
     const newData = { ...data, options };
     await dispatch(CreateSelectListItem(newData));
@@ -54,10 +90,13 @@ function CreateInfoFilter() {
 
   return (
     <div className="update-filter-info">
-      <span>Create select product</span>
+      <span>Create operation system</span>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <label>Name</label>
         <input {...register("name")} placeholder="Name ... " />
+        <label>Property</label>
         <input {...register("property")} placeholder="Property ..." />
+        <label>Option</label>
         <div className="option-list">
           {addOption.map((option, index) => (
             <div className="option-list-item" key={index}>
@@ -74,9 +113,7 @@ function CreateInfoFilter() {
             </div>
           ))}
         </div>
-        <span onClick={handleAddOption}>
-          Add Options
-        </span>
+        <span onClick={handleAddOption}>Add Options</span>
         <button type="submit">Add</button>
       </form>
     </div>

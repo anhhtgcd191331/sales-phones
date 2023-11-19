@@ -86,11 +86,6 @@ function Dashboard() {
           </div>
           <ChartDashboard />
         </div>
-
-        <div className="dashboard-new">
-          <div className="dashboard"></div>
-          <div className="dashboard"></div>
-        </div>
       </div>
     </section>
   );

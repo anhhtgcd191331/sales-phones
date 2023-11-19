@@ -1,10 +1,7 @@
 import { Pagination } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  editCurrentPage,
-  paginationProduct,
-} from "../../../../actions/product/ProductAction";
+import { editCurrentPage, paginationProduct } from "../../../../actions/product/ProductAction";
 import Product from "./Product";
 
 function ListProduct({ listProducts }) {
@@ -21,32 +18,23 @@ function ListProduct({ listProducts }) {
       <table>
         <tbody>
           <tr>
-            <th>No.</th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Type</th>
+            <th style={{ minWidth: 100 }}>No.</th>
+            <th style={{ minWidth: 180 }}>Image</th>
+            <th style={{ minWidth: 200 }}>Name</th>
+            <th style={{ minWidth: 180 }}>Price</th>
+            <th style={{ minWidth: 100 }}>Type</th>
+            <th style={{ minWidth: 100 }}>Action</th>
           </tr>
           {listProducts
             ? listProducts.map((item, index) => (
-                <Product
-                  product={item}
-                  key={item._id}
-                  update={item._id}
-                  number={index}
-                />
+                <Product product={item} key={item._id} update={item._id} number={index} />
               ))
             : ""}
         </tbody>
       </table>
 
       <div className="pagination">
-        <Pagination
-          defaultCurrent={1}
-          current={currentPage}
-          total={pages * 10}
-          onChange={HandleChangePage}
-        />
+        <Pagination defaultCurrent={1} current={currentPage} total={pages * 10} onChange={HandleChangePage} />
       </div>
     </div>
   );

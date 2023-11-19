@@ -28,6 +28,16 @@ function Detail() {
               <div className="detail-info-slide-image">
                 <img src={detailProduct.image}></img>
               </div>
+              <div>
+                <ul className="text-description">
+                  <li>100% new device, genuine Apple Vietnam.</li>
+                  <li>VN/A of Apple Vietnam Box, Manual.</li>
+                  <li>
+                    1 FOR 1 EXCHANGE within 30 days if there is a manufacturer hardware defect. 12-month warranty at
+                    Apple's official warranty center.
+                  </li>
+                </ul>
+              </div>
             </div>
             <DetailInfo product={detailProduct}></DetailInfo>
           </div>

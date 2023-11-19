@@ -109,6 +109,7 @@ export const saveProduct = (product) => async (dispatch, getState) => {
     }
   } catch (error) {
     dispatch({ type: "SAVE_PRODUCT_FAIL", payload: error.message });
+    throw new Error(error.response.data.message);
   }
 };
 

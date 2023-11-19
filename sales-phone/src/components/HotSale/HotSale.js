@@ -26,7 +26,10 @@ function HotSale({ type }) {
       {hotIphone ? (
         <ListPoducts HotSaleProducts={handlePercentDiscount(hotIphone)} />
       ) : (
-        ""
+        <div className="no-product">
+          <img src="/images/noproduct.webp" />
+          <span>No Product</span>
+        </div>
       )}
     </div>
   );

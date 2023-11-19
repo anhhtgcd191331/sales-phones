@@ -2,14 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./order.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  GetAllDistrict,
-  GetAllProvince,
-  GetAllWard,
-  OrderInfo,
-} from "../../actions/OrderAction";
+import { GetAllDistrict, GetAllProvince, GetAllWard, OrderInfo } from "../../actions/OrderAction";
 import Payment from "./Payment";
-
+import { message } from "antd";
 function Order() {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
@@ -24,9 +19,10 @@ function Order() {
 
   const [chooseProvince, setChooseProvince] = useState({ name: "Hồ Chí Minh" });
   const [chooseDistrict, setChooseDistrict] = useState({
-    name: "Quận / Huyện",
+    name: "District",
   });
-  const [chooseWard, setChooseWard] = useState({ name: "Phường / Xã" });
+  const [chooseWard, setChooseWard] = useState({ name: "Wards" });
+  const [isVerified, setIsVerified] = useState(false);
 
   const handleListProvince = (e) => {
     e.preventDefault();
@@ -42,15 +38,96 @@ function Order() {
   };
 
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.qty * item.salePrice,
-    0
-  );
+  const totalPrice = cartItems.reduce((total, item) => total + item.qty * item.salePrice, 0);
   const userInfo = useSelector((state) => state.userSignin.userInfo);
-
+  function isValidPhoneNumber(phoneNumber) {
+    const phoneRegex = /^\d{10}$/;
+    return phoneRegex.test(phoneNumber);
+  }
   const onSubmit = async (data) => {
-    if (!data) {
-      alert("Bạn hãy nhập đầy đủ thông tin");
+    if (!data.name) {
+      message.error({
+        content: "Please enter name!",
+        duration: 1,
+        className: "custom-class",
+        style: {
+          position: "absolute",
+          right: "2rem",
+          top: "70px",
+        },
+      });
+      setIsVerified(false);
+      return;
+    }
+    if (!data.phone) {
+      message.error({
+        content: "Please enter phone!",
+        duration: 1,
+        className: "custom-class",
+        style: {
+          position: "absolute",
+          right: "2rem",
+          top: "70px",
+        },
+      });
+      setIsVerified(false);
+      return;
+    }
+    if (!isValidPhoneNumber(data.phone)) {
+      message.error({
+        content: "Phone is not in the correct format!",
+        duration: 1,
+        className: "custom-class",
+        style: {
+          position: "absolute",
+          right: "2rem",
+          top: "70px",
+        },
+      });
+      setIsVerified(false);
+      return;
+    }
+    if (!data.more) {
+      message.error({
+        content: "Please enter address!",
+        duration: 1,
+        className: "custom-class",
+        style: {
+          position: "absolute",
+          right: "2rem",
+          top: "70px",
+        },
+      });
+      setIsVerified(false);
+      return;
+    }
+    if (chooseDistrict.name === "District") {
+      message.error({
+        content: "Please choose district!",
+        duration: 1,
+        className: "custom-class",
+        style: {
+          position: "absolute",
+          right: "2rem",
+          top: "70px",
+        },
+      });
+      setIsVerified(false);
+      return;
+    }
+    if (chooseWard.name === "Wards") {
+      message.error({
+        content: "Please choose wards!",
+        duration: 1,
+        className: "custom-class",
+        style: {
+          position: "absolute",
+          right: "2rem",
+          top: "70px",
+        },
+      });
+      setIsVerified(false);
+
       return;
     }
     const Order = {
@@ -68,7 +145,9 @@ function Order() {
       name: userInfo.name,
       user: userInfo,
     };
+    console.log(Order);
     await dispatch(OrderInfo(Order));
+    setIsVerified(true);
   };
 
   useEffect(() => {
@@ -100,22 +179,14 @@ function Order() {
       <div className="order-content">
         <form className="order-page" onSubmit={handleSubmit(onSubmit)}>
           <div className="customer">
-            <h4>THÔNG TIN KHÁCH HÀNG </h4>
+            <h4>CUSTOMER INFORMATION</h4>
             <div className="form-customer">
-              <input
-                placeholder="Họ và tên"
-                {...register("name")}
-                required
-              ></input>
-              <input
-                placeholder="Số điện thoại"
-                {...register("phone")}
-                required
-              ></input>
+              <input placeholder="Full Name" {...register("name")}></input>
+              <input placeholder="Number phone" {...register("phone")}></input>
             </div>
           </div>
           <div className="address">
-            <h4>CHỌN ĐỊA CHỈ</h4>
+            <h4>SELECT ADDRESS</h4>
             <div className="address-form">
               <div className="province">
                 {allProvince ? (
@@ -133,15 +204,7 @@ function Order() {
                       <aside>
                         {allProvince
                           ? allProvince.data.map((item, i) => (
-                              <span
-                                key={i}
-                                onClick={() =>
-                                  handleSelectProvince(
-                                    item.ProvinceName,
-                                    item.ProvinceID
-                                  )
-                                }
-                              >
+                              <span key={i} onClick={() => handleSelectProvince(item.ProvinceName, item.ProvinceID)}>
                                 {item.ProvinceName}
                               </span>
                             ))
@@ -159,11 +222,7 @@ function Order() {
                     {chooseDistrict.name}
                   </button>
                 ) : (
-                  <button
-                    className=""
-                    onClick={(e) => handleListProvince(e)}
-                    disabled="disabled"
-                  >
+                  <button className="" onClick={(e) => handleListProvince(e)} disabled="disabled">
                     {chooseDistrict.name}
                   </button>
                 )}
@@ -173,15 +232,7 @@ function Order() {
                       <aside>
                         {allDistrict
                           ? allDistrict.data.map((item, i) => (
-                              <span
-                                key={i}
-                                onClick={() =>
-                                  handleSelectDistrict(
-                                    item.DistrictName,
-                                    item.DistrictID
-                                  )
-                                }
-                              >
+                              <span key={i} onClick={() => handleSelectDistrict(item.DistrictName, item.DistrictID)}>
                                 {item.DistrictName}
                               </span>
                             ))
@@ -199,11 +250,7 @@ function Order() {
                     {chooseWard.name}
                   </button>
                 ) : (
-                  <button
-                    className=""
-                    onClick={(e) => handleListWard(e)}
-                    disabled
-                  >
+                  <button className="" onClick={(e) => handleListWard(e)} disabled>
                     {chooseWard.name}
                   </button>
                 )}
@@ -213,12 +260,7 @@ function Order() {
                       <aside>
                         {allWard && allWard.data !== null
                           ? allWard.data.map((item, i) => (
-                              <span
-                                key={i}
-                                onClick={() =>
-                                  handleSelectWard(item.WardName, item.WardCode)
-                                }
-                              >
+                              <span key={i} onClick={() => handleSelectWard(item.WardName, item.WardCode)}>
                                 {item.WardName}
                               </span>
                             ))
@@ -231,15 +273,11 @@ function Order() {
                 )}
               </div>
               <div className="province">
-                <input
-                  placeholder="Số nhà, đường ..."
-                  {...register("more")}
-                  required
-                ></input>
+                <input placeholder="Add, street ... " {...register("more")}></input>
               </div>
             </div>
           </div>
-          <Payment />
+          <Payment isVerified={isVerified} />
         </form>
       </div>
     </section>

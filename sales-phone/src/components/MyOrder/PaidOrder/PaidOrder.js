@@ -20,13 +20,10 @@ const orderItem = (item) => (
 
 export const orderParent = (item) => (
   <div className="all-myorder-parent-item">
-    <div className="all-myorder-list">
-      {item.orderItems.map((item) => orderItem(item))}
-    </div>
+    <div className="all-myorder-list">{item.orderItems.map((item) => orderItem(item))}</div>
     <div className="all-myorder-item-totalprice">
       <div>
-        <span>Tổng số tiền : </span>{" "}
-        <strong>{formatPrice(item.totalPrice)}đ</strong>
+        <span>Total : </span> <strong>{formatPrice(item.totalPrice)}</strong>
       </div>
     </div>
   </div>
@@ -45,9 +42,14 @@ function PaidOrder() {
     <Layout>
       <MyOrder>
         <div className="all-myorder">
-          {myOrdersPaid && myOrdersPaid.length > 0
-            ? myOrdersPaid.map((item) => orderParent(item))
-            : "Bạn không có đơn hàng nào"}
+          {myOrdersPaid && myOrdersPaid.length > 0 ? (
+            myOrdersPaid.map((item) => orderParent(item))
+          ) : (
+            <div className="no-product">
+              <img src="/images/noproduct.webp" />
+              <span>You have no orders</span>
+            </div>
+          )}
         </div>
       </MyOrder>
     </Layout>

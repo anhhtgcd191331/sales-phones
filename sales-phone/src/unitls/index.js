@@ -1,15 +1,29 @@
 export const handlePercentDiscount = (products) => {
   const newList = products.map((product) => {
-    const percentDiscount =
-      100 - Math.round((product.salePrice * 100) / product.price);
+    const percentDiscount = 100 - Math.round((product.salePrice * 100) / product.price);
     return { ...product, percentDiscount: percentDiscount };
   });
   return newList;
 };
 
 export const formatPrice = (price) => {
-  const formatter = new Intl.NumberFormat("vi");
+  // const formatter = new Intl.NumberFormat("vi");
+  // return formatter.format(price);
+  const formatter = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
+
   return formatter.format(price);
+};
+
+export const formatCurrency = (amount) => {
+  const formatter = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
+
+  return formatter.format(amount);
 };
 
 export const getFirstCharacterUser = (name) => {

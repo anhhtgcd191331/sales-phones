@@ -28,18 +28,18 @@ function ChartDashboard() {
       {
         name: "Monthly bill",
         data: [
-          numberOfOrdersOnMonth(1)+1,
-          numberOfOrdersOnMonth(2)+1,
-          numberOfOrdersOnMonth(3)+1,
-          numberOfOrdersOnMonth(4)+1,
-          numberOfOrdersOnMonth(5)+1,
-          numberOfOrdersOnMonth(6)+1,
-          numberOfOrdersOnMonth(7)+5,
-          numberOfOrdersOnMonth(8)+9,
-          numberOfOrdersOnMonth(9)+1,
-          numberOfOrdersOnMonth(10)+1,
-          numberOfOrdersOnMonth(11)+1,
-          numberOfOrdersOnMonth(12)+1,
+          numberOfOrdersOnMonth(1) + 1,
+          numberOfOrdersOnMonth(2) + 1,
+          numberOfOrdersOnMonth(3) + 1,
+          numberOfOrdersOnMonth(4) + 1,
+          numberOfOrdersOnMonth(5) + 1,
+          numberOfOrdersOnMonth(6) + 1,
+          numberOfOrdersOnMonth(7) + 5,
+          numberOfOrdersOnMonth(8) + 9,
+          numberOfOrdersOnMonth(9) + 1,
+          numberOfOrdersOnMonth(10) + 1,
+          numberOfOrdersOnMonth(11) + 1,
+          numberOfOrdersOnMonth(12) + 1,
         ],
       },
     ],
@@ -55,20 +55,7 @@ function ChartDashboard() {
         curve: "smooth",
       },
       xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
+        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       },
       legend: {
         position: "top",
@@ -80,12 +67,7 @@ function ChartDashboard() {
   };
   return (
     <div className="dashboard-middle-chart">
-      <Chart
-        options={chartOptions.options}
-        series={chartOptions.series}
-        type="line"
-        width="500"
-      />
+      <Chart options={chartOptions.options} series={chartOptions.series} type="line" width="400" />
     </div>
   );
 }

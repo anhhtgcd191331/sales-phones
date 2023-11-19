@@ -18,29 +18,17 @@ function RateStar() {
   const product = useSelector((state) => state.getProductById.product);
 
   const countReview = product.reviews.length;
-  let averageRate = Math.round(
-    product.reviews.reduce((a, c) => a + c.star, 0) / countReview
-  );
+  let averageRate = Math.round(product.reviews.reduce((a, c) => a + c.star, 0) / countReview);
 
   if (userInfo) {
     var existsUser = product.reviews.find((x) => x.name == userInfo.name);
   }
 
-  const fiveStar = Math.round(
-    (product.reviews.filter((x) => x.star === 5).length / countReview) * 100
-  );
-  const fourStar = Math.round(
-    (product.reviews.filter((x) => x.star === 4).length / countReview) * 100
-  );
-  const threeStar = Math.round(
-    (product.reviews.filter((x) => x.star === 3).length / countReview) * 100
-  );
-  const twoStar = Math.round(
-    (product.reviews.filter((x) => x.star === 2).length / countReview) * 100
-  );
-  const oneStar = Math.round(
-    (product.reviews.filter((x) => x.star === 1).length / countReview) * 100
-  );
+  const fiveStar = Math.round((product.reviews.filter((x) => x.star === 5).length / countReview) * 100);
+  const fourStar = Math.round((product.reviews.filter((x) => x.star === 4).length / countReview) * 100);
+  const threeStar = Math.round((product.reviews.filter((x) => x.star === 3).length / countReview) * 100);
+  const twoStar = Math.round((product.reviews.filter((x) => x.star === 2).length / countReview) * 100);
+  const oneStar = Math.round((product.reviews.filter((x) => x.star === 1).length / countReview) * 100);
 
   const onFinish = (value) => {
     const review = {
@@ -61,9 +49,7 @@ function RateStar() {
     <div>
       <Row>
         <Col span={18} xs={24} sm={24} md={24} style={{ minWidth: "100%" }}>
-          <span className="rate-star-title">
-            {product.reviews.length} Đánh giá {product.name}
-          </span>
+          <h3>{`Rate (${product.reviews.length})`}</h3>
         </Col>
       </Row>
       <Row>
@@ -80,11 +66,8 @@ function RateStar() {
                     flexDirection: "column",
                   }}
                 >
-                  <p
-                    className="star-average"
-                    style={{ textTransform: "uppercase", fontSize: "18px" }}
-                  >
-                    sao trung bình
+                  <p className="star-average" style={{ textTransform: "uppercase", fontSize: "18px" }}>
+                    AVERAGE
                   </p>
                   <div
                     className="star-average-num"
@@ -108,10 +91,7 @@ function RateStar() {
                 <Col span={10}>
                   <li className="thongke">
                     <div className="numstar">
-                      5{" "}
-                      <AiOutlineStar
-                        style={{ color: "orange", margin: "0 5px" }}
-                      />
+                      5 <AiOutlineStar style={{ color: "orange", margin: "0 5px" }} />
                     </div>
                     <div className="percent" style={{ display: "flex" }}>
                       <Progress
@@ -129,10 +109,7 @@ function RateStar() {
                   </li>
                   <li className="thongke">
                     <div className="numstar">
-                      4{" "}
-                      <AiOutlineStar
-                        style={{ color: "orange", margin: "0 5px" }}
-                      />
+                      4 <AiOutlineStar style={{ color: "orange", margin: "0 5px" }} />
                     </div>
                     <div className="percent" style={{ display: "flex" }}>
                       <Progress
@@ -150,10 +127,7 @@ function RateStar() {
                   </li>
                   <li className="thongke">
                     <div className="numstar">
-                      3{" "}
-                      <AiOutlineStar
-                        style={{ color: "orange", margin: "0 5px" }}
-                      />
+                      3 <AiOutlineStar style={{ color: "orange", margin: "0 5px" }} />
                     </div>
                     <div className="percent" style={{ display: "flex" }}>
                       <Progress
@@ -171,10 +145,7 @@ function RateStar() {
                   </li>
                   <li className="thongke">
                     <div className="numstar">
-                      2{" "}
-                      <AiOutlineStar
-                        style={{ color: "orange", margin: "0 5px" }}
-                      />
+                      2 <AiOutlineStar style={{ color: "orange", margin: "0 5px" }} />
                     </div>
                     <div className="percent" style={{ display: "flex" }}>
                       <Progress
@@ -192,10 +163,7 @@ function RateStar() {
                   </li>
                   <li className="thongke">
                     <div className="numstar">
-                      1{" "}
-                      <AiOutlineStar
-                        style={{ color: "orange", margin: "0 5px" }}
-                      />
+                      1 <AiOutlineStar style={{ color: "orange", margin: "0 5px" }} />
                     </div>
                     <div className="percent" style={{ display: "flex" }}>
                       <Progress
@@ -227,43 +195,35 @@ function RateStar() {
                     <button
                       className="guidanhgia"
                       onClick={() => {
-                        userInfo
-                          ? setShowRate(true)
-                          : alert("You have to login");
+                        userInfo ? setShowRate(true) : alert("You have to login");
                       }}
                     >
-                      {" "}
-                      Gửi đánh giá{" "}
+                      Rate
                     </button>
                   </Col>
                 )}
               </Row>
             </div>
             {showRate ? (
-              <div
-                className="rate-star"
-                style={{
-                  fontSize: "15px",
-                  fontWeight: "bold",
-                  padding: "1rem 0",
-                }}
-              >
-                Vui lòng chọn đánh giá: <Rate onChange={setRate} />
-              </div>
+              <h3>
+                Please select a rating: <Rate onChange={setRate} />
+              </h3>
             ) : (
               ""
             )}
             {showEvaluate ? (
               <div className="rate-send">
-                <p>Đánh giá: </p>
-                <textarea
-                  placeholder="Vui lòng đánh giá sản phẩm ở đây"
-                  onChange={(e) => setEvaluate(e.target.value)}
-                ></textarea>
-                <button className="guidanhgia" onClick={() => onFinish()}>
-                  {" "}
-                  Gửi{" "}
-                </button>
+                <p>Feedback: </p>
+                <div className="rate-send-mid">
+                  <img src="/images/login.webp"></img>
+                  <textarea
+                    placeholder="Please comment the product here"
+                    onChange={(e) => setEvaluate(e.target.value)}
+                  ></textarea>
+                  <button className="guidanhgia" onClick={() => onFinish()}>
+                    Send
+                  </button>
+                </div>
               </div>
             ) : (
               ""
@@ -276,23 +236,15 @@ function RateStar() {
         {product.reviews.map((item, i) => (
           <Col key={i} span={18} align="start" xs={24} sm={24} md={18}>
             <div className="danhgia">
-              <p
-                className="name"
-                style={{ fontWeight: "bold", fontSize: "15px" }}
-              >
+              <p className="name" style={{ fontWeight: "bold", fontSize: "15px" }}>
                 {item.name}
               </p>
               <div className="cmt" style={{ display: "flex" }}>
-                <Rate
-                  style={{ color: "orange", fontSize: "14px" }}
-                  value={item.star}
-                  disabled={true}
-                />
+                <Rate style={{ color: "orange", fontSize: "14px" }} value={item.star} disabled={true} />
                 <p className="cmt" style={{ marginLeft: "1rem" }}>
                   {item.comment}
                 </p>
               </div>
-              <Divider />
             </div>
           </Col>
         ))}

@@ -87,7 +87,7 @@ export const createPayment = asyncHandler(async (req, res) => {
   vnp_Params["vnp_SecureHash"] = secureHash;
   vnpUrl += "?" + querystring.stringify(vnp_Params, { encode: false });
   console.log({ code: "00", data: vnpUrl });
-
+  console.log(vnp_Params);
   res.status(200).json({ code: "00", data: vnpUrl });
 });
 

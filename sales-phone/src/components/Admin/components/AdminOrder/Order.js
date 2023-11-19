@@ -1,26 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { createOrderGhn, PrintOrderGhn } from "../../../../actions/GhnAction";
-import {
-  deleteOrder,
-  getAllOrder,
-  ShippingOrder,
-} from "../../../../actions/OrderAction";
+import { deleteOrder, getAllOrder, ShippingOrder } from "../../../../actions/OrderAction";
 import { formatDateOrderPaypal, formatPrice } from "../../../../unitls";
 
 function Order({ order }) {
-  
   const dispatch = useDispatch();
 
-  const {
-    orderItems,
-    totalPrice,
-    paymentMethod,
-    cancelOrder,
-    shippingAddress,
-    status,
-    paymentResult,
-  } = order;
+  const { orderItems, totalPrice, paymentMethod, cancelOrder, shippingAddress, status, paymentResult } = order;
 
   const handleShippingOrder = async (order) => {
     await dispatch(createOrderGhn(order._id)); // create order in giaohangnhanh
@@ -30,7 +17,7 @@ function Order({ order }) {
   };
 
   const handlePrintOrder = (order) => {
-    console.log(order._id)
+    console.log(order._id);
     dispatch(PrintOrderGhn(order._id));
   };
 
@@ -54,22 +41,19 @@ function Order({ order }) {
           ))}
         </div>
         <div className="toatalPrice">
-          <span>Tổng tiền: {formatPrice(totalPrice)}</span>
+          <span>Total: {formatPrice(totalPrice)}</span>
         </div>
         <div className="order-info">
           <div className="order-info-address">
-            <b>Địa chỉ : </b> {"  "}
+            <b>Address : </b> {"  "}
             {shippingAddress.name},{""}
             {shippingAddress.province}, {shippingAddress.district},{"  "}
-            {shippingAddress.ward}, {shippingAddress.detail},{" "}
-            {shippingAddress.phone}
+            {shippingAddress.ward}, {shippingAddress.detail}, {shippingAddress.phone}
           </div>
         </div>
 
         {paymentResult ? (
-          <div className="order-payment-check">
-            Paid : {formatDateOrderPaypal(paymentResult.update_time)}
-          </div>
+          <div className="order-payment-check">Paid : {formatDateOrderPaypal(paymentResult.update_time)}</div>
         ) : (
           ""
         )}
@@ -77,14 +61,7 @@ function Order({ order }) {
         <div className="order-bottom">
           {status === "shipping" ? (
             <div className="order-status">
-              <span>
-                Đã xác nhận{" "}
-                {paymentMethod === "payOnline" ? (
-                  <span>& Đã thanh toán</span>
-                ) : (
-                  ""
-                )}
-              </span>
+              <span>Confirmed {paymentMethod === "payOnline" ? <span>& Paid</span> : ""}</span>
             </div>
           ) : (
             ""
@@ -93,11 +70,8 @@ function Order({ order }) {
           <div className="order-button">
             {status === "pendding" && cancelOrder === false ? (
               <>
-                <button
-                  className="shipping"
-                  onClick={() => handleShippingOrder(order)}
-                >
-                  Xác nhận đơn hàng
+                <button className="shipping" onClick={() => handleShippingOrder(order)}>
+                  Confirm Order
                 </button>
               </>
             ) : (
@@ -106,12 +80,9 @@ function Order({ order }) {
 
             {cancelOrder === true ? (
               <>
-                <span> Khách yêu cầu hủy đơn </span>
-                <button
-                  className="shipping"
-                  onClick={() => handleDeleteOrder(order)}
-                >
-                  Hủy đơn
+                <span> Customer requests to cancel order</span>
+                <button className="shipping" onClick={() => handleDeleteOrder(order)}>
+                  Cancel order
                 </button>
               </>
             ) : (
@@ -119,11 +90,8 @@ function Order({ order }) {
             )}
 
             {status === "shipping" ? (
-              <button
-                className="shipping"
-                onClick={() => handlePrintOrder(order)}
-              >
-                In đơn hàng
+              <button className="shipping" onClick={() => handlePrintOrder(order)}>
+                Print order
               </button>
             ) : (
               ""

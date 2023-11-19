@@ -1,30 +1,18 @@
 import React, { useEffect, useState } from "react";
-import "./slider.css";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+import "./slider.css";
+// import "slick-carousel/slick/slick-theme.css";
 import { HiOutlineChevronRight, HiOutlineChevronLeft } from "react-icons/hi";
 
 function SampleNextArrow(props) {
   const { className, onClick } = props;
-  return (
-    <div
-      className={`${className}`}
-      style={{ display: "none" }}
-      onClick={onClick}
-    />
-  );
+  return <div className={`${className}`} style={{ display: "none" }} onClick={onClick} />;
 }
 
 function SamplePrevArrow(props) {
   const { className, onClick } = props;
-  return (
-    <div
-      className={`${className}`}
-      style={{ display: "none" }}
-      onClick={onClick}
-    />
-  );
+  return <div className={`${className}`} style={{ display: "none" }} onClick={onClick} />;
 }
 
 function SliderShow(props) {
@@ -62,40 +50,24 @@ function SliderShow(props) {
       <div className="carousel">
         <div className="carousel-left">
           <div className="carousel-left-slide">
-            <Slider
-              asNavFor={nav.nav2}
-              ref={(slider) => (slider1 = slider)}
-              {...settings}
-            >
+            <Slider asNavFor={nav.nav2} ref={(slider) => (slider1 = slider)} {...settings}>
               <div className="img-item-slider" key={1}>
                 <img
-                  src="https://cdn2.cellphones.com.vn/690x300,webp,q100/https://dashboard.cellphones.com.vn/storage/iphone-14-sliding-th7-new.png"
+                  src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:80/plain/https://dashboard.cellphones.com.vn/storage/iphone-15-11-2023.jpg"
                   alt=""
                 />
               </div>
               <div className="img-item-slider" key={2}>
-                <img
-                  src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/1380-600-max.png"
-                  alt=""
-                />
+                <img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/1380-600-max.png" alt="" />
               </div>
               <div className="img-item-slider" key={3}>
-                <img
-                  src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/ip11-tg-690-300-max.png"
-                  alt=""
-                />
+                <img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/ip11-tg-690-300-max.png" alt="" />
               </div>
               <div className="img-item-slider" key={4}>
-                <img
-                  src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/dd690x300_XR.png"
-                  alt=""
-                />
+                <img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/dd690x300_XR.png" alt="" />
               </div>
               <div className="img-item-slider" key={5}>
-                <img
-                  src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/se-aw-690-300-max.png"
-                  alt=""
-                ></img>
+                <img src="https://cdn.cellphones.com.vn/media/ltsoft/promotion/se-aw-690-300-max.png" alt=""></img>
               </div>
             </Slider>
             <div className="carousel-left-move" onClick={() => previous()}>
@@ -135,22 +107,13 @@ function SliderShow(props) {
         </div>
         <div className="carousel-right">
           <div className="carousel-right-item">
-            <img
-              src="https://cdn2.cellphones.com.vn/690x300,webp,q10/https://dashboard.cellphones.com.vn/storage/s21-fe-right-banner-th7.png"
-              alt=""
-            />
+            <img src="/images/qc1.webp" alt="" />
           </div>
           <div className="carousel-right-item">
-            <img
-              src="https://cdn2.cellphones.com.vn/690x300,webp,q10/https://dashboard.cellphones.com.vn/storage/ipadth7-new.png"
-              alt=""
-            />
+            <img src="/images/qc2.webp" alt="" />
           </div>
           <div className="carousel-right-item">
-            <img
-              src="https://cdn2.cellphones.com.vn/690x300,webp,q10/https://dashboard.cellphones.com.vn/storage/msi%20gaming%20right%20banner.jpg"
-              alt=""
-            />
+            <img src="/images/qc3.webp" alt="" />
           </div>
         </div>
       </div>

@@ -6,7 +6,8 @@ export const createOrderGhn = (orderId) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     const { data } = await axios.post(
-      `http://localhost:5000/api/orders/update/${orderId}`, {
+      `http://localhost:5000/api/orders/update/${orderId}`,
+      {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
         },

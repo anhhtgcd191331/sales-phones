@@ -2,10 +2,7 @@ import React from "react";
 import { AiOutlineForm, AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  DeleteProduct,
-  paginationProduct,
-} from "../../../../actions/product/ProductAction";
+import { DeleteProduct, paginationProduct } from "../../../../actions/product/ProductAction";
 import { formatPrice } from "../../../../unitls";
 
 function Product(props) {
@@ -26,19 +23,12 @@ function Product(props) {
       <td>{product.name}</td>
       <td>{formatPrice(product.salePrice)}</td>
       <td>{product.type}</td>
-      <td
-        className="delete-product"
-        onClick={() => handleDeleteProduct(product._id)}
-      >
-        <AiOutlineDelete />
-      </td>
-      <td className="update-product">
-        <Link to={`/admin/product/update/${product._id}`}>
+      <td onClick={() => handleDeleteProduct(product._id)}>
+        <AiOutlineDelete style={{ color: "#000" }} />
+        <Link style={{ marginLeft: 10, color: "#000" }} to={`/admin/product/update/${product._id}`}>
           <AiOutlineEdit />
         </Link>
-      </td>
-      <td className="review-product">
-        <Link to={`/admin/product/reviewProduct/${product._id}`}>
+        <Link style={{ marginLeft: 10, color: "#000" }} to={`/admin/product/reviewProduct/${product._id}`}>
           <AiOutlineForm />
         </Link>
       </td>

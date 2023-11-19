@@ -18,6 +18,7 @@
 
 .footer-top {
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
     padding: 1rem 0;
     border-bottom: 1px solid white;
@@ -25,10 +26,15 @@
 
 .footer-top-name,
 .footer-top-about,
-.footer-top-sp,
-.footer-top-delivery {
-    width: calc(25%);
+.footer-top-delivery,
+.footer-top-delivery-image
+{
     text-align: left;
+    flex: 1;
+}
+.footer-top-sp {
+    flex: 1.5;
+
 }
 
 .footer-top li {
@@ -38,6 +44,7 @@
 .footer-top li a {
     color: #d70018;
     font-weight: 500;
+    font-size: 13px;
 }
 
 .footer-top-name h2 {
@@ -52,11 +59,10 @@
 .footer-top-sp h2,
 .footer-top-delivery h2 {
     text-transform: uppercase;
-
-    padding: 1rem 0;
+    padding: 20px 0;
     color: #333;
+    font-size: 20px;
     margin: 0;
-
 }
 
 .footer-top-about img {
@@ -72,7 +78,8 @@
 }
 
 .footer-bot {
-    padding: 1rem 0;
+    padding: 14px 0px;
+    font-size: 12px;
     color: #333;
 }
 
@@ -80,6 +87,9 @@
     margin: 0;
 }
 
+.footer-top-delivery-image img {
+    width: 200px;
+}
 @media screen and (max-width: 800px) {
     .footer {
         width: 100%;

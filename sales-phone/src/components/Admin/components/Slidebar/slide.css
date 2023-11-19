@@ -1,89 +1,87 @@
 .layout {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
 .layout__content {
-    margin-left: 300px;
-    min-height: 100vh;
-    flex-grow: 1;
-    background: #eee;
+  min-height: 100vh;
+  overflow-y: scroll;
+  flex-grow: 1;
+  background-color: #f2f5f7;
+  width: calc(100% - 260px);
 }
 
 .layout__content-main {
-    position: relative;
-    background: #eee;
+  position: relative;
+  background: #eee;
+  height: 1vh;
 }
 
 .sidebar {
-
-    min-width: 300px;
-    height: 100%;
-    position: fixed;
-    left: 0;
-    top: 0;
+  width: 260px;
+  height: 100%;
+  background-color: #fff;
 }
 
 .sidebar-top {
-    color: #1890ff;
-    font-size: 30px;
-    font-weight: 600;
-    padding: 1.5rem 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  color: #4e74df;
+  font-size: 30px;
+  font-weight: 600;
+  padding: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .sidebar-top img {
-    width: 200px;
-    height: 100px;
-    object-fit: cover;
+  height: 100px;
+  object-fit: cover;
 }
 
 .sidebar-list {
-    padding: 0 1rem;
+  padding: 0 1rem;
 }
 
 .sidebar-list-item {
-    position: relative;
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 600;
-    padding: 1rem;
-
-    border-radius: 18px;
-    color: #6b6b6b;
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  padding: 1rem;
+  text-decoration: none;
+  border-radius: 10px;
+  color: #000;
+  margin-bottom: 4px;
 }
 
 .sidebar-list-item.active {
-    background: #1890ff;
-    color: white;
+  background: #4e74df;
+  color: white;
 }
 
 .sidebar-list-item p {
-    margin: 0 0 0 1rem;
+  margin-left: 14px;
 }
 
 .sidebar-list-item:hover {
-    background: #1890ff;
-    color: white;
-    transition: .3s;
+  background: #4e74df;
+  color: white;
+  transition: 0.3s;
 }
-
+.sidebar-list-item span {
+  padding-top: 4px;
+}
 .admin-order-new {
-    position: absolute;
-    top: 0px;
-    right: -10px;
-
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    line-height: 30px;
-    text-align: center;
-
-    background: #1890ff;
-    color: white;
-    font-size: 13px;
+  position: absolute;
+  top: 0px;
+  right: -10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  line-height: 30px;
+  text-align: center;
+  background: #4e74df;
+  color: white;
+  font-size: 13px;
 }

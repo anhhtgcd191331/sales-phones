@@ -11,7 +11,6 @@ function DataFilterProduct() {
       <div className="update-filter-title">
         <span>Update detail product</span>
       </div>
-
       <FilterMenu />
       <CreateInfoFilter />
       <AllTypeProduct />

@@ -10,6 +10,7 @@ function Blog() {
 
   return (
     <section id="blog">
+      <h3>Blog</h3>
       {detailProduct.blog ? (
         <div className="blog">
           <div className="blog-content" style={styleBlog}>
@@ -23,7 +24,7 @@ function Blog() {
                   setShowMoreBlog(!showMoreBlog);
                 }}
               >
-                Xem Thêm đánh giá
+                More
               </div>
             ) : (
               ""

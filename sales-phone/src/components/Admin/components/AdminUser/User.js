@@ -17,7 +17,7 @@ function User(props) {
       <td>{user.email}</td>
       <td>{user.address}</td>
       <td>{user.phone}</td>
-      <td className="delete-user" onClick={() => handleDeleteUser(user)}>
+      <td onClick={() => handleDeleteUser(user)}>
         <AiFillDelete />
       </td>
     </tr>

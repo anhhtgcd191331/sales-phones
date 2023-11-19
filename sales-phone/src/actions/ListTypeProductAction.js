@@ -14,7 +14,9 @@ export const CreateNewTypeProduct = (type) => async (dispatch) => {
       type
     );
     dispatch({ type: "CREATE_NEW_TYPE_PRODUCT", payload: data });
-  } catch (error) {}
+  } catch (error) {
+    throw new Error(error?.response?.data?.message);
+  }
 };
 
 export const deleteTypeProduct = (type) => async (dispatch) => {

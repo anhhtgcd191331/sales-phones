@@ -25,17 +25,13 @@ function Login() {
     <div className="login-container">
       <div className="login-page">
         <h2> LOGIN </h2>
+        <img src="/images/login.webp"></img>
         <form onSubmit={handleSubmit(onSubmit)} className="form-login">
           <input {...register("email")} placeholder="Email" required></input>
-          <input
-            {...register("password")}
-            placeholder="Password"
-            type="password"
-            required
-          ></input>
+          <input {...register("password")} placeholder="Password" type="password" required></input>
 
           <input type="submit" value="Login"></input>
-          {error ? <h2>{error}</h2> : <></>}
+          {error ? <h2 style={{ fontSize: 20, color: "#d70018" }}>{error}</h2> : <></>}
           <Link to="/register">Register new account?</Link>
         </form>
       </div>

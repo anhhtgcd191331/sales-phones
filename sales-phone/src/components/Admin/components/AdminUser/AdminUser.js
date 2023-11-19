@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUser } from "../../../../actions/UserAction";
 import ListUser from "./ListUser";
 import "./adminuser.css";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function AdminUser() {
   const dispatch = useDispatch();
@@ -14,7 +15,13 @@ function AdminUser() {
   return (
     <div className="admin-user">
       <span>Users</span>
-      {users ? <ListUser users={users} /> : <h2> Loading</h2>}
+      {users ? (
+        <ListUser users={users} />
+      ) : (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <CircularProgress />
+        </div>
+      )}
     </div>
   );
 }

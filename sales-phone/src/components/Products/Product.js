@@ -12,7 +12,7 @@ function Product({ product }) {
 
   const success = () => {
     message.success({
-      content: "Thêm vào giỏ hàng thành công",
+      content: "Add to cart successfully",
       duration: 1,
       className: "custom-class",
       style: {
@@ -35,13 +35,13 @@ function Product({ product }) {
         <img src={product.image}></img>
         <p className="hotsale-listproduct-product-name">{product.name}</p>
         <div className="price">
-          <span className="price1">{formatPrice(product.salePrice)}đ</span>
-          <span className="price2">{formatPrice(product.price)}đ</span>
+          <span className="price1">{formatPrice(product.salePrice)}</span>
+          <span className="price2">{formatPrice(product.price)}</span>
         </div>
       </Link>
       {product.percentDiscount >= 2 ? (
         <div className="discount">
-          <p>{product.percentDiscount}%</p>
+          <span className="discount-text">-{product.percentDiscount}%</span>
         </div>
       ) : null}
       <div className="buy">
@@ -51,7 +51,7 @@ function Product({ product }) {
             AddProductToCart(product);
           }}
         >
-          Mua Ngay
+          BUY NOW
         </Link>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import {
@@ -9,24 +9,16 @@ import {
 } from "../../../../../actions/ChatAction";
 import ListConversation from "./ListConversation";
 
-function Contact() {
+function Contact({
+  currentIdChat,
+  setCurrentIdChat,
+  conversationList,
+  setNewMessage,
+}) {
   let socket;
   const ENDPOINT = "localhost:5000";
   const dispatch = useDispatch();
-  const conversationList = useSelector((state) => state.chat.conversationList);
-  const idConversation = useSelector((state) => state.chat.idConversation);
-
-  if (conversationList) {
-  }
-  useEffect(() => {
-    dispatch(getAllConversationList());
-  }, []);
-
-  useEffect(() => {
-    if (conversationList) {
-      dispatch(updateIdConversation(conversationList[0]));
-    }
-  }, [conversationList]);
+  // const idConversation = useSelector((state) => state.chat.idConversation);
 
   // useEffect(() => {
   //     dispatch(SeenConversation(idConversation))
@@ -41,7 +33,9 @@ function Contact() {
     });
 
     socket.on("show-me", (data) => {
+      setNewMessage(data);
       dispatch(showConversation(data));
+      dispatch(getAllConversationList());
     });
 
     return () => socket.disconnect();
@@ -49,11 +43,14 @@ function Contact() {
 
   const onConversationClick = (conversation) => {
     dispatch(updateIdConversation(conversation));
+    setCurrentIdChat(conversation?._id);
+    localStorage.setItem("currentIdChat", conversation?._id);
   };
   return (
     <div className="contact">
       {conversationList ? (
         <ListConversation
+          currentIdChat={currentIdChat}
           conversationList={conversationList}
           onConversationClick={onConversationClick}
         />

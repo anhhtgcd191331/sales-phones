@@ -5,7 +5,7 @@ import AdminOrderMenu from "./AdminOrderMenu";
 
 function AdminOrder() {
   return (
-    <div>
+    <div style={{ height: "100vh", overflow: "scroll" }}>
       <AdminOrderMenu />
       <AdminOrderAll />
     </div>

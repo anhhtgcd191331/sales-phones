@@ -26,18 +26,10 @@ function FilterMenu() {
 
   const filterMenuItemAntd = (item, i) => (
     <div key={i} className="filter-menu-item">
-      <div
-        className={
-          dataFilter[`${item.property}`]
-            ? `filter-menu-item-name active`
-            : `filter-menu-item-name`
-        }
-      >
+      <div className={dataFilter[`${item.property}`] ? `filter-menu-item-name active` : `filter-menu-item-name`}>
         <Dropdown overlay={menuShow(item, item.options)} trigger={["click"]}>
           <span className="ant-dropdown-link">
-            {dataFilter[`${item.property}`]
-              ? dataFilter[`${item.property}`]
-              : item.name}
+            {dataFilter[`${item.property}`] ? dataFilter[`${item.property}`] : item.name}
             {/* <DownOutlined /> */}
           </span>
         </Dropdown>
@@ -49,22 +41,15 @@ function FilterMenu() {
     <div className="menu-show">
       <div className="menu-show-list">
         {arrItem.map((item, i) => (
-          <div
-            key={i}
-            className={`menu-show-item`}
-            onClick={() => handleClickMenuShow(item, menuItem)}
-          >
+          <div key={i} className={`menu-show-item`} onClick={() => handleClickMenuShow(item, menuItem)}>
             {item}
           </div>
         ))}
       </div>
 
       <div className="menu-show-btn">
-        <button
-          className="cancel"
-          onClick={() => CancelChooseMenuShow(menuItem, arrItem)}
-        >
-          Bỏ Chọn
+        <button className="cancel" onClick={() => CancelChooseMenuShow(menuItem, arrItem)}>
+          Reset
         </button>
       </div>
     </div>
@@ -86,11 +71,7 @@ function FilterMenu() {
   const MenuFirmProduct = (item, i) => (
     <div
       key={i}
-      className={
-        dataFilter[`type`] === item.name
-          ? `filter-menu-firm-item active`
-          : "filter-menu-firm-item"
-      }
+      className={dataFilter[`type`] === item.name ? `filter-menu-firm-item active` : "filter-menu-firm-item"}
       onClick={() => HandleFilterProductByType(item.name)}
     >
       <img src={item.img}></img>
@@ -108,15 +89,18 @@ function FilterMenu() {
   };
 
   return (
-    <div>
-      <div className="filter-menu-firm">
-        {List ? List.map((item, i) => MenuFirmProduct(item, i)) : ""}
+    <div style={{ width: "100%", display: "flex" }}>
+      <div style={{ marginRight: 60 }}>
+        <h3>Operating system</h3>
+        <div className="filter-menu">
+          {filterMenuList && filterMenuList.length > 0
+            ? filterMenuList.map((item, i) => filterMenuItemAntd(item, i))
+            : ""}
+        </div>
       </div>
-
-      <div className="filter-menu">
-        {filterMenuList && filterMenuList.length > 0
-          ? filterMenuList.map((item, i) => filterMenuItemAntd(item, i))
-          : ""}
+      <div>
+        <h3>Brand</h3>
+        <div className="filter-menu-firm">{List ? List.map((item, i) => MenuFirmProduct(item, i)) : ""}</div>
       </div>
     </div>
   );

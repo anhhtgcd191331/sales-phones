@@ -1,167 +1,175 @@
 #appchat {
-    position: fixed;
-    width: 80%;
+  background-color: #f2f5f7;
 }
 
-#appchat>span {
-    display: flex;
-    padding: 1rem;
-    font-size: 20px;
-    font-weight: 600;
-    color: #6b6b6b;
+#appchat > span {
+  display: flex;
+  font-size: 20px;
+  font-weight: 600;
+  height: 60px;
+  line-height: 60px;
+  padding-left: 1rem;
 }
 
 .appchat {
-    display: flex;
-    background: white;
-    margin-left: 1rem;
-
+  display: flex;
+  background: white;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  border-radius: 14px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  overflow: hidden;
 }
 
 .chatuser {
-    z-index: 1111;
+  z-index: 1111;
 }
 
 .contact {
-    position: fixed;
-    height: 100vh;
-    overflow-y: scroll;
-    background-color: white;
-
-    padding: 1rem;
-    width: 280px;
-    border: 1px solid #eee;
-
+  /* height: calc(100vh - 60px); */
+  overflow-y: scroll;
+  background-color: white;
+  width: 260px;
+  border: 1px solid #eee;
+  overflow: hidden;
 }
 
 .contact-top h2 {
-    margin: 0;
-    display: flex;
-    padding: 1rem 0;
-    font-size: 25px;
-    font-weight: 600;
-    color: #6b6b6b;
+  margin: 0;
+  display: flex;
+  padding: 1rem 0;
+  font-size: 25px;
+  font-weight: 600;
+  color: #6b6b6b;
 }
 
 .contact-list {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .contact-list-item {
-    display: flex;
-    margin-top: 1rem;
-    cursor: pointer;
+  display: flex;
+  cursor: pointer;
+  padding: 10px;
+  margin: 5px;
 }
-
+.contact-list-item:hover {
+  background-color: #f3f7f9;
+  border-radius: 14px;
+}
+.contact-list-item.active {
+  background-color: #f3f7f9;
+  border-radius: 14px;
+}
 .contact-list-item-avarta {
-    min-width: 50px;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 17px;
-    font-weight: 600;
-    color: #6b6b6b;
-    background: #eee;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 17px;
+  font-weight: 600;
+  color: #6b6b6b;
+  background: #eee;
 
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .contact-list-item-content {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 
 .contact-list-item-name {
-    font-size: 18px;
-    font-weight: 700;
-    margin: 0;
-    text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  text-align: left;
 }
 
 .contact-list-item-lastmessage {
-    overflow-y: hidden;
-    color: #6b6b6b;
+  overflow-y: hidden;
+  color: #6b6b6b;
+  font-size: 14px;
 }
 
-
 .chat {
-    flex-grow: 1;
-    margin-left: 315px;
+  /* flex-grow: 1; */
+  width: calc(100% - 260px);
 }
 
 .ad-chatuser {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #eee;
-
-    height: 92vh;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eee;
+  height: calc(100vh - 60px);
 }
 
 .ad-chatuser-user {
-    text-align: left;
-    color: #6b6b6b;
-    padding: 1.5rem 1rem;
-    border-bottom: 1px solid #eee;
-    box-shadow: 0px 3px 4px -4px;
+  text-align: left;
+  color: #6b6b6b;
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid #eee;
+  box-shadow: 0px 3px 4px -4px;
 }
 
 .ad-chatuser-user-name {
-    text-align: left;
-    font-weight: 700;
-    font-size: 17px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 17px;
+  color: #000;
 }
 
 .ad-chatuser-listmessage {
-    flex-grow: 1;
-    overflow-y: scroll;
+  flex-grow: 1;
+  overflow-y: scroll;
 }
 
 .ad-chatuser-listmessage-message {
-    display: flex;
-    padding: 1rem;
-    word-break: break-word;
+  display: flex;
+  padding: 1rem;
+  word-break: break-word;
 }
 
 .ad-chatuser-listmessage-message p {
-    padding: 8px;
-    background: #e4e6eb;
-    max-width: 400px;
-    margin-top: .2rem;
-    border-radius: 20px;
-    text-align: left;
+  padding: 8px 12px;
+  background: #e4e6eb;
+  max-width: 400px;
+  margin-top: 0.2rem;
+  border-radius: 10px;
+  text-align: left;
 }
 
 .ad-chatuser-listmessage-message.me {
-    justify-content: flex-end
+  justify-content: flex-end;
 }
 
 .ad-chatuser-listmessage-message.me p {
-    background: #1890ff;
-    color: white;
+  background: #4e74df;
+  color: white;
 }
 
 .ad-chatuser-typemessage {
-    display: flex;
-    padding: 1rem .5rem;
-    border-top: 1px solid #eee;
-    box-shadow: 0px 3px 4px -4px;
+  display: flex;
+  padding: 1rem 0.5rem;
+  border-top: 1px solid #eee;
+  box-shadow: 0px 3px 4px -4px;
 }
 
 .ad-chatuser-typemessage input {
-    width: 100%;
-    padding: .3rem 1rem;
-    outline: none;
-    border: 1px solid #ddd;
+  width: 100%;
+  padding: 12px 10px;
+  outline: none;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
 .ad-chatuser-typemessage button {
-    background: #1890ff;
-    color: white;
-    margin-left: 10px;
-    border: none;
-    border-radius: 10px;
-    outline: none;
-    padding: .5rem 1.5rem;
-    cursor: pointer;
+  background: #4e74df;
+  color: white;
+  margin-left: 10px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
 }

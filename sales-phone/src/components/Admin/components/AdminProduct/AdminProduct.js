@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import "./adminproduct.css";
 import { paginationProduct } from "../../../../actions/product/ProductAction";
 import ListProduct from "./ListProduct";
-
+import CircularProgress from "@mui/material/CircularProgress";
 function AdminProduct() {
   const dispatch = useDispatch();
   const currentPage = useSelector((state) => state.allProduct.currentPage);
@@ -16,15 +16,18 @@ function AdminProduct() {
   return (
     <div className="admin-product">
       <div className="admin-product-link">
-        <Link to="/admin/product/create" className="add-product">
-          <AiOutlineAppstoreAdd />
-        </Link>
-        <Link to="/admin/product/update/info" className="add-product">
-          <AiOutlineTool />
-        </Link>
+        <span>Product</span>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Link to="/admin/product/create" className="add-product">
+            Create
+          </Link>
+          <Link to="/admin/product/update/info" className="add-product">
+            Update
+          </Link>
+        </div>
       </div>
 
-      {products ? <ListProduct listProducts={products} /> : "Loading"}
+      {products ? <ListProduct listProducts={products} /> : <CircularProgress style={{ margin: "auto" }} />}
     </div>
   );
 }

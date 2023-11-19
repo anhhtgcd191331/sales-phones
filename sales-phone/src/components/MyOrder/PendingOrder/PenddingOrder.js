@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  cancelOrder,
-  getOrderPenddingByUser,
-} from "../../../actions/OrderAction";
+import { cancelOrder, getOrderPenddingByUser } from "../../../actions/OrderAction";
 import { formatPrice } from "../../../unitls";
 import Layout from "../../Layout/Layout";
 import MyOrder from "../MyOrder";
@@ -15,16 +12,10 @@ function PenddingOrder() {
 
   const orderParent = (item) => (
     <div className="all-myorder-parent-item">
-      <div className="all-myorder-list">
-        {item.orderItems.map((item) => orderItem(item))}
-      </div>
+      <div className="all-myorder-list">{item.orderItems.map((item) => orderItem(item))}</div>
       <div className="all-myorder-item-totalprice">
-        {item.paymentMethod === "payOnline" ? (
-          <span>Đã thanh toán : </span>
-        ) : (
-          <span>Tổng số tiền : </span>
-        )}{" "}
-        <strong>{formatPrice(item.totalPrice)}đ</strong>
+        {item.paymentMethod === "payOnline" ? <span>Đã thanh toán : </span> : <span>Total : </span>}{" "}
+        <strong>{formatPrice(item.totalPrice)}</strong>
         <div className="myorder-cancel">
           {item.cancelOrder ? (
             <span>Đang yêu cầu hủy đơn</span>
@@ -44,9 +35,7 @@ function PenddingOrder() {
         <p>{item.name}</p>
         <span>x{item.qty}</span>
       </div>
-      <div className="all-myorder-item-price">
-        {formatPrice(item.salePrice)}
-      </div>
+      <div className="all-myorder-item-price">{formatPrice(item.salePrice)}</div>
     </div>
   );
 
@@ -62,9 +51,14 @@ function PenddingOrder() {
     <Layout>
       <MyOrder>
         <div className="all-myorder">
-          {myOrdersPendding && myOrdersPendding.length > 0
-            ? myOrdersPendding.map((item) => orderParent(item))
-            : "Bạn không có đơn hàng nào"}
+          {myOrdersPendding && myOrdersPendding.length > 0 ? (
+            myOrdersPendding.map((item) => orderParent(item))
+          ) : (
+            <div className="no-product">
+              <img src="/images/noproduct.webp" />
+              <span>You have no orders</span>
+            </div>
+          )}
         </div>
       </MyOrder>
     </Layout>

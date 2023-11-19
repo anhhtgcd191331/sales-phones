@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function VnPaySuccess() {
@@ -20,14 +20,20 @@ function VnPaySuccess() {
   return (
     <section id="order-success">
       <div className="order-success">
+        <img src="/images/noproduct.webp" />
+
         <span>
-          <AiOutlineCheck />
+          <AiOutlineCheck size={32} />
         </span>
-        <p>Đặt hàng thành công</p>
+        <p>Order Success!</p>
         {/* <Link to="">OK</Link> */}
         <div className="links">
-          <Link to="/myOrder">Xem lại đơn hàng</Link>
-          <Link to="/">Trang chủ</Link>
+          <Link to="/myOrder" className="btn">
+            Review your order
+          </Link>
+          <Link to="/" className="btn">
+            Homepage
+          </Link>
         </div>
       </div>
     </section>

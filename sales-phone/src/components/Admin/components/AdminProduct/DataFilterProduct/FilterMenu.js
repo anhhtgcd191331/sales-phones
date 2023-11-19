@@ -41,9 +41,7 @@ function FilterMenu() {
 
   const handleRemoveOption = (option, index) => {
     let newChooseSelectItem = { ...chooseSelectItem };
-    const newOptions = newChooseSelectItem.options.filter(
-      (item, indexItem) => indexItem !== index
-    );
+    const newOptions = newChooseSelectItem.options.filter((item, indexItem) => indexItem !== index);
     setChooseSelectItem({ ...chooseSelectItem, options: newOptions });
   };
 
@@ -67,7 +65,7 @@ function FilterMenu() {
         <Dropdown overlay={menuShow(item)} trigger={["click"]}>
           <span className="ant-dropdown-link">
             {item.name}
-            <AiOutlineDown />
+            {/* <AiOutlineDown /> */}
           </span>
         </Dropdown>
       </div>
@@ -90,10 +88,10 @@ function FilterMenu() {
       </div>
 
       <div className="menu-show-btn">
-        <button className="cancel" onClick={() => showModal(menuItem)}>
+        <button className="update" onClick={() => showModal(menuItem)}>
           Update
         </button>
-        <button className="cancel" onClick={() => removeSelectItem(menuItem)}>
+        <button className="update" onClick={() => removeSelectItem(menuItem)}>
           Delete
         </button>
       </div>
@@ -101,31 +99,25 @@ function FilterMenu() {
   );
   return (
     <div>
+      <div
+        style={{
+          backgroundColor: "#fff",
+          padding: " 16px 16px 0px 16px",
+          fontWeight: 600,
+          fontSize: 17,
+        }}
+      >
+        <span>Operation system</span>
+      </div>
       <div className="filter-menu">
         {filterMenuList && filterMenuList.length > 0
           ? filterMenuList.map((item, i) => filterMenuItemAntd(item, i))
           : ""}
         {chooseSelectItem ? (
-          <Modal
-            title={`Update ${chooseSelectItem.name}`}
-            open={isModalVisible}
-            onCancel={handleCancel}
-            footer={false}
-          >
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="form-update-select"
-            >
-              <input
-                {...register("name")}
-                placeholder="Name ... "
-                defaultValue={chooseSelectItem.name}
-              />
-              <input
-                {...register("property")}
-                placeholder="Property ..."
-                defaultValue={chooseSelectItem.property}
-              />
+          <Modal title={`Update ${chooseSelectItem.name}`} open={isModalVisible} onCancel={handleCancel} footer={false}>
+            <form onSubmit={handleSubmit(onSubmit)} className="form-update-select">
+              <input {...register("name")} placeholder="Name ... " defaultValue={chooseSelectItem.name} />
+              <input {...register("property")} placeholder="Property ..." defaultValue={chooseSelectItem.property} />
               <div className="option-list">
                 {chooseSelectItem.options.map((option, index) => (
                   <div className="option-list-item" key={index}>

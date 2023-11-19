@@ -24,15 +24,12 @@ function Register() {
   return (
     <div className="register-container">
       <div className="signup-page">
-        <h2>ĐĂNG KÍ</h2>
+        <h2>REGISTER</h2>
+        <img src="/images/login.webp"></img>
+
         <form onSubmit={handleSubmit(onSubmit)} classname="form-signup">
           <input {...register("name")} placeholder="Name" required></input>
-          <input
-            {...register("email")}
-            placeholder="Email"
-            type="email"
-            required
-          ></input>
+          <input {...register("email")} placeholder="Email" type="email" required></input>
           <input
             {...register("password")}
             placeholder="Password"

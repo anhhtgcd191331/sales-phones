@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  getproductById,
-  removeProductById,
-  saveProduct,
-} from "../../../../actions/product/ProductAction";
+import { getproductById, removeProductById, saveProduct } from "../../../../actions/product/ProductAction";
 import { getAllSelectList } from "../../../../actions/SelectListAction";
 
 function AdminUpdateProduct() {
@@ -20,7 +16,11 @@ function AdminUpdateProduct() {
   const SelectList = useSelector((state) => state.selectList.List);
   const [activeTypeProduct, setActiveTypeproduct] = useState(undefined);
   const { List } = useSelector((state) => state.allTypeProduct);
-
+  useEffect(() => {
+    if (detailProduct?.image) {
+      setImage(detailProduct.image);
+    }
+  }, [detailProduct]);
   useEffect(() => {
     dispatch(getproductById(id));
 
@@ -48,10 +48,7 @@ function AdminUpdateProduct() {
     formData.append("price", data.price);
     formData.append("amount", data.amount);
     formData.append("salePrice", data.salePrice);
-    formData.append(
-      "type",
-      activeTypeProduct ? activeTypeProduct : detailProduct.type
-    );
+    formData.append("type", activeTypeProduct ? activeTypeProduct : detailProduct.type);
     formData.append("image", image);
     formData.append("_id", id);
 
@@ -64,8 +61,10 @@ function AdminUpdateProduct() {
     formData.append("design", data.design);
     formData.append("screen", data.screen);
 
-    await dispatch(saveProduct(formData));
-    navigate("/admin/product")
+    try {
+      await dispatch(saveProduct(formData));
+      navigate("/admin/product");
+    } catch {}
   };
 
   const MenuFirmProduct = (item) => (
@@ -92,46 +91,39 @@ function AdminUpdateProduct() {
     <div className="admin-create">
       <span>Update Product</span>
       {detailProduct ? (
-        <form
-          className="admin-create-product"
-          onSubmit={handleSubmit(onSubmit)}
-          encType="multipart/form-data"
-        >
-          <input
-            {...register("name")}
-            placeholder="Name"
-            defaultValue={detailProduct.name}
-          ></input>
-          <input
-            {...register("amount")}
-            placeholder="Amount"
-            type="number"
-            defaultValue={detailProduct.amount}
-          ></input>
-          <input
-            {...register("price")}
-            placeholder="Price"
-            type="number"
-            defaultValue={detailProduct.price}
-          ></input>
-          <input
-            {...register("salePrice")}
-            placeholder="SalePrice"
-            type="number"
-            defaultValue={detailProduct.salePrice}
-          ></input>
-
-          <div className="filter-menu-firm">
-            {List ? List.map((item) => MenuFirmProduct(item)) : ""}
+        <form className="admin-create-product" onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+          <label>Name</label>
+          <input {...register("name")} placeholder="Name" defaultValue={detailProduct.name}></input>
+          <label>Amount</label>
+          <input {...register("amount")} placeholder="Amount" type="number" defaultValue={detailProduct.amount}></input>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div>
+              <label>Price</label>
+              <input
+                {...register("price")}
+                placeholder="Price"
+                type="number"
+                defaultValue={detailProduct.price}
+              ></input>
+            </div>
+            <div>
+              <label>Sale Price</label>
+              <input
+                {...register("salePrice")}
+                placeholder="SalePrice"
+                type="number"
+                defaultValue={detailProduct.salePrice}
+              ></input>
+            </div>
           </div>
+          <label>Brand</label>
+          <div className="filter-menu-firm">{List ? List.map((item) => MenuFirmProduct(item)) : ""}</div>
 
+          <label>Operation system</label>
           {SelectList && SelectList.length > 0
             ? SelectList.map((item) => (
                 <div className="select-type">
-                  <select
-                    {...register(`${item.property}`)}
-                    defaultValue={detailProduct[`${item.property}`]}
-                  >
+                  <select {...register(`${item.property}`)} defaultValue={detailProduct[`${item.property}`]}>
                     {item.options.map((x) => (
                       <option value={x}>{x}</option>
                     ))}
@@ -140,11 +132,8 @@ function AdminUpdateProduct() {
               ))
             : ""}
 
-          <input
-            type="file"
-            {...register("image")}
-            onChange={handleFileImageChange}
-          ></input>
+          <label>Image</label>
+          <input type="file" {...register("image")} onChange={handleFileImageChange}></input>
           <button type="submit">Update Product</button>
         </form>
       ) : (
