@@ -16,7 +16,7 @@ import PaymentRouter from "./routers/PaymentRouter.js";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5555;
 const server = http.createServer(app);
 
 app.use(cors());

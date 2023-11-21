@@ -6,7 +6,7 @@ export const createOrderGhn = (orderId) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     const { data } = await axios.post(
-      `http://localhost:5000/api/orders/update/${orderId}`,
+      `http://localhost:5555/api/orders/update/${orderId}`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -22,7 +22,7 @@ export const createOrderGhn = (orderId) => async (dispatch, getState) => {
 export const PrintOrderGhn = (orderId) => async (dispatch) => {
   try {
     const { data } = await axios.get(
-      `http://localhost:5000/api/orders/print/${orderId}`
+      `http://localhost:5555/api/orders/print/${orderId}`
     );
     window.open(data);
     dispatch({ type: "PRINT_ORDER_GHN", payload: data });

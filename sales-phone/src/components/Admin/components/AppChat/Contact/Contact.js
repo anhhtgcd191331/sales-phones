@@ -16,7 +16,7 @@ function Contact({
   setNewMessage,
 }) {
   let socket;
-  const ENDPOINT = "localhost:5000";
+  const ENDPOINT = "localhost:5555";
   const dispatch = useDispatch();
   // const idConversation = useSelector((state) => state.chat.idConversation);
 

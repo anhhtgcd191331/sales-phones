@@ -28,7 +28,7 @@ function AppChatAdmin() {
     if (conversationList && currentIdChat) {
       const getAllMessageByConversation = async () => {
         const { data } = await axios.get(
-          `http://localhost:5000/api/chats/message?idConversation=${currentIdChat}`
+          `http://localhost:5555/api/chats/message?idConversation=${currentIdChat}`
         );
         setMessages(data.messageList);
       };

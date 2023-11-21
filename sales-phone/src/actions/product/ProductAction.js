@@ -24,7 +24,7 @@ export const filterProductByRandomField = (infoProduct) => async (dispatch) => {
 
 export const getAllProduct = () => async (dispatch) => {
   try {
-    const { data } = await axios.get(`http://localhost:5000/api/products/`);
+    const { data } = await axios.get(`http://localhost:5555/api/products/`);
     dispatch({ type: "GET_ALL_PRODUCT", payload: data });
   } catch (error) {
     dispatch({ type: "GET_ALL_PRODUCT_FAIL", payload: error.message });
@@ -65,7 +65,7 @@ export const paginationProduct = (page) => async (dispatch) => {
 export const getproductById = (id) => async (dispatch) => {
   try {
     const { data } = await axios.get(
-      `http://localhost:5000/api/products/detail/${id}`
+      `http://localhost:5555/api/products/detail/${id}`
     );
     dispatch({ type: "GET_PRODUCT_BY_ID", payload: data });
   } catch (error) {
@@ -84,7 +84,7 @@ export const saveProduct = (product) => async (dispatch, getState) => {
     } = getState();
     if (!product.get("_id")) {
       const { data } = await axios.post(
-        "http://localhost:5000/api/products/add-product",
+        "http://localhost:5555/api/products/add-product",
         product,
         {
           headers: {
@@ -96,7 +96,7 @@ export const saveProduct = (product) => async (dispatch, getState) => {
       // document.location.href = '/admin/product';
     } else {
       const { data } = await axios.put(
-        `http://localhost:5000/api/products/update`,
+        `http://localhost:5555/api/products/update`,
         product,
         {
           headers: {
@@ -119,7 +119,7 @@ export const DeleteProduct = (productId) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     const { data } = await axios.delete(
-      `http://localhost:5000/api/products/delete/${productId}`,
+      `http://localhost:5555/api/products/delete/${productId}`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -135,7 +135,7 @@ export const DeleteProduct = (productId) => async (dispatch, getState) => {
 export const searchProduct = (name) => async (dispatch, getState) => {
   try {
     const { data } = await axios.get(
-      `http://localhost:5000/api/products/search/product?name=${name}`
+      `http://localhost:5555/api/products/search/product?name=${name}`
     );
     dispatch({ type: "SEARCH_PRODUCT", payload: data });
   } catch (error) {
@@ -146,7 +146,7 @@ export const searchProduct = (name) => async (dispatch, getState) => {
 export const reviewProduct = (id, review) => async (dispatch, getState) => {
   try {
     const { data } = await axios.post(
-      `http://localhost:5000/api/products/rate/${id}`,
+      `http://localhost:5555/api/products/rate/${id}`,
       review
     );
     dispatch({ type: "REVIEW_PRODUCT", payload: data });
@@ -158,7 +158,7 @@ export const reviewProduct = (id, review) => async (dispatch, getState) => {
 export const commentProduct = (id, comment) => async (dispatch, getState) => {
   try {
     const { data } = await axios.post(
-      `http://localhost:5000/api/products/comment/${id}`,
+      `http://localhost:5555/api/products/comment/${id}`,
       comment
     );
     dispatch({ type: "COMMENT_PRODUCT", payload: data });
@@ -171,7 +171,7 @@ export const repCommentProduct =
   (id, comment) => async (dispatch, getState) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:5000/api/products/rep/comment/${id}`,
+        `http://localhost:5555/api/products/rep/comment/${id}`,
         comment
       );
       dispatch({ type: "REP_COMMENT_PRODUCT", payload: data });
@@ -184,7 +184,7 @@ export const pinCommentProduct =
   (id, comment) => async (dispatch, getState) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:5000/api/products/pin/comment/${id}`,
+        `http://localhost:5555/api/products/pin/comment/${id}`,
         comment
       );
       dispatch({ type: "PIN_COMMENT_PRODUCT", payload: data });
@@ -200,7 +200,7 @@ export const BlogProduct =
     } = getState();
     try {
       const { data } = await axios.post(
-        `http://localhost:5000/api/products/blog/${id}`,
+        `http://localhost:5555/api/products/blog/${id}`,
         blog,
         {
           headers: {

@@ -13,7 +13,7 @@ function HotSale({ type }) {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/products/${name}`
+          `http://localhost:5555/api/products/${name}`
         );
         setHotIphone(data);
       } catch (error) {}

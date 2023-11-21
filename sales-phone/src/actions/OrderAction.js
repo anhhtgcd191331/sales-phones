@@ -12,7 +12,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     const { data } = await axios.post(
-      "http://localhost:5000/api/orders/create",
+      "http://localhost:5555/api/orders/create",
       order,
       {
         headers: {
@@ -33,7 +33,7 @@ export const updateOrder = (orderId, order) => async (dispatch, getState) => {
     } = getState();
 
     const { data } = await axios.post(
-      `http://localhost:5000/api/orders/update/${orderId}`,
+      `http://localhost:5555/api/orders/update/${orderId}`,
       order,
       {
         headers: {
@@ -48,7 +48,7 @@ export const updateOrder = (orderId, order) => async (dispatch, getState) => {
 export const cancelOrder = (orderId) => async (dispatch, getState) => {
   try {
     const { data } = await axios.post(
-      `http://localhost:5000/api/orders/cancel/${orderId}`
+      `http://localhost:5555/api/orders/cancel/${orderId}`
     );
     dispatch({ type: "CANCEL_ORDER", payload: data });
   } catch (error) {}
@@ -59,7 +59,7 @@ export const getAllOrder = () => async (dispatch, getState) => {
     const {
       userSignin: { userInfo },
     } = getState();
-    const { data } = await axios.get(`http://localhost:5000/api/orders`, {
+    const { data } = await axios.get(`http://localhost:5555/api/orders`, {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
       },
@@ -93,7 +93,7 @@ export const GetAllOrderPendding = () => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     const { data } = await axios.get(
-      `http://localhost:5000/api/orders/orderPendding`,
+      `http://localhost:5555/api/orders/orderPendding`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -110,7 +110,7 @@ export const GetAllOrderShipping = () => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     const { data } = await axios.get(
-      `http://localhost:5000/api/orders/orderShipping`,
+      `http://localhost:5555/api/orders/orderShipping`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -127,7 +127,7 @@ export const GetAllOrderPaid = () => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     const { data } = await axios.get(
-      `http://localhost:5000/api/orders/orderPaid`,
+      `http://localhost:5555/api/orders/orderPaid`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -144,7 +144,7 @@ export const deleteOrder = (orderId) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     const { data } = await axios.delete(
-      `http://localhost:5000/api/orders/delete/${orderId}`,
+      `http://localhost:5555/api/orders/delete/${orderId}`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -162,7 +162,7 @@ export const ShippingOrder = (orderId) => async (dispatch, getState) => {
     } = getState();
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/orders/shipping/${orderId}`,
+      `http://localhost:5555/api/orders/shipping/${orderId}`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -180,7 +180,7 @@ export const PaidOrder = (orderId) => async (dispatch, getState) => {
     } = getState();
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/orders/paid/${orderId}`,
+      `http://localhost:5555/api/orders/paid/${orderId}`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -245,7 +245,7 @@ export const getOrderByUser = (idUser) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     const { data } = await axios.get(
-      `http://localhost:5000/api/orders/${idUser}`,
+      `http://localhost:5555/api/orders/${idUser}`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -263,7 +263,7 @@ export const getOrderPenddingByUser =
         userSignin: { userInfo },
       } = getState();
       const { data } = await axios.get(
-        `http://localhost:5000/api/orders/orderPendding/${idUser}`,
+        `http://localhost:5555/api/orders/orderPendding/${idUser}`,
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
@@ -281,7 +281,7 @@ export const getOrderShippingByUser =
         userSignin: { userInfo },
       } = getState();
       const { data } = await axios.get(
-        `http://localhost:5000/api/orders/orderShipping/${idUser}`,
+        `http://localhost:5555/api/orders/orderShipping/${idUser}`,
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
@@ -298,7 +298,7 @@ export const getOrderPaidByUser = (idUser) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     const { data } = await axios.get(
-      `http://localhost:5000/api/orders/orderPaid/${idUser}`,
+      `http://localhost:5555/api/orders/orderPaid/${idUser}`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
@@ -316,7 +316,7 @@ export const payOrder =
     } = getState();
     try {
       const { data } = axios.put(
-        `http://localhost:5000/api/orders/pay/${order._id}`,
+        `http://localhost:5555/api/orders/pay/${order._id}`,
         paymentResult,
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },

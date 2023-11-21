@@ -13,7 +13,7 @@ function VnPay() {
       paymentMethod: "payOnline",
     };
     const { data } = await axios.post(
-      "http://localhost:5000/api/payment/create",
+      "http://localhost:5555/api/payment/create",
       OrderPaid
     );
     if (data.code === "00") {

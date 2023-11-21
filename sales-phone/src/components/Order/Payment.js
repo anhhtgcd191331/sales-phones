@@ -49,7 +49,7 @@ function Payment({ isVerified }) {
 
   // useEffect(() => {
   //   const addPayPalScript = async () => {
-  //     const { data } = await axios.get("http://localhost:5000/api/config/paypal");
+  //     const { data } = await axios.get("http://localhost:5555/api/config/paypal");
   //     const script = document.createElement("script");
   //     script.type = "text/javascript";
   //     script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;

@@ -7,7 +7,7 @@ import TypeMessage from "./TypeMessage";
 
 function Chat({ messages, setMessages }) {
   let socket;
-  const ENDPOINT = "localhost:5000";
+  const ENDPOINT = "localhost:5555";
   socket = io(ENDPOINT);
   const { userInfo } = useSelector((state) => state.userSignin);
   const idConversation = useSelector((state) => state.chat.idConversation);
@@ -16,7 +16,7 @@ function Chat({ messages, setMessages }) {
     if (!idConversation) return;
     const getAllMessageByConversation = async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/api/chats/message?idConversation=${idConversation}`
+        `http://localhost:5555/api/chats/message?idConversation=${idConversation}`
       );
       setMessages(data.messageList);
     };
@@ -56,7 +56,7 @@ function Chat({ messages, setMessages }) {
       idConversation,
     };
     const { data } = await axios.post(
-      "http://localhost:5000/api/chats/save",
+      "http://localhost:5555/api/chats/save",
       payload
     );
     socket.emit("chat", data);

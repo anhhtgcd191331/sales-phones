@@ -3,7 +3,7 @@ import axios from "axios";
 export const login = (user) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:5000/api/users/login",
+      "http://localhost:5555/api/users/login",
       user
     );
     dispatch({ type: "USER_LOGIN_SUCCESS", payload: data });
@@ -17,7 +17,7 @@ export const login = (user) => async (dispatch) => {
 export const SignupUser = (user) => async (dispatch) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:5000/api/users/add-user",
+      "http://localhost:5555/api/users/add-user",
       user
     );
     localStorage.setItem("userInfo", JSON.stringify(data));
@@ -37,7 +37,7 @@ export const getAllUser = () => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await axios.get("http://localhost:5000/api/users", {
+    const { data } = await axios.get("http://localhost:5555/api/users", {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
       },
@@ -54,7 +54,7 @@ export const deleteUser = (userId) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await axios.delete(
-      `http://localhost:5000/api/users/delete/${userId}`,
+      `http://localhost:5555/api/users/delete/${userId}`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,

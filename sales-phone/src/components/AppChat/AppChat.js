@@ -10,7 +10,7 @@ import ListMessage from "./Message/ListMessage";
 let socket;
 
 function AppChat() {
-  const ENDPOINT = "http://localhost:5000";
+  const ENDPOINT = "http://localhost:5555";
   const [messages, setMessages] = useState([]);
   const [openChat, setOpenChat] = useState(false);
   const { userInfo } = useSelector((state) => state.userSignin);
@@ -18,7 +18,7 @@ function AppChat() {
   useEffect(() => {
     const getAllMessageByConversation = async () => {
       const { data } = await axios.get(
-        `http://localhost:5000/api/chats/message?idUser=${userInfo._id}`
+        `http://localhost:5555/api/chats/message?idUser=${userInfo._id}`
       );
       setMessages(data.messageList);
     };
@@ -64,7 +64,7 @@ function AppChat() {
         };
         console.log(payload);
         const { data } = await axios.post(
-          "http://localhost:5000/api/chats/save",
+          "http://localhost:5555/api/chats/save",
           payload
         );
         socket.emit("chat", data);
@@ -79,7 +79,7 @@ function AppChat() {
         idConversation,
       };
       const { data } = await axios.post(
-        "http://localhost:5000/api/chats/save",
+        "http://localhost:5555/api/chats/save",
         payload
       );
       console.log("data", data);

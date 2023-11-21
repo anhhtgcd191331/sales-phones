@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getAllConversationList = (product) => async (dispatch) => {
   try {
-    const { data } = await axios.get("http://localhost:5000/api/chats");
+    const { data } = await axios.get("http://localhost:5555/api/chats");
     dispatch({ type: "GET_ALL_CONVERSATION", payload: data });
   } catch (error) {}
 };
