@@ -2,28 +2,21 @@ import asyncHandler from "express-async-handler";
 import OrderModel from "../models/OrderModel.js";
 
 import querystring from "qs";
+import crypto from "crypto";
 import sha256 from "sha256";
 import dateFormat from "dateformat";
 
 const tmnCode = process.env.VNP_TMN_CODE;
-const secretKey = process.env.VNP_HASH_SECRET;
+const secretKey = "MFJANUUSVDEVYPSZSGMSHHGRYQWDIVNJ";
 const url = process.env.VNP_URL;
 const returnUrl = process.env.VNP_RETURN_URL;
 
 export const createPayment = asyncHandler(async (req, res) => {
-  console.log("createPayment");
-  //   let ipAddr =
-  //     req.headers["x-forwarded-for"] ||
-  //     req.connection.remoteAddress ||
-  //     req.socket.remoteAddress ||
-  //     req.connection.socket.remoteAddress;
-  let ipAddr = "127.0.0.1";
   const order = new OrderModel({
     order_code: "",
     to_ward_code: req.body.to_ward_code,
     to_district_id: req.body.to_district_id,
     cancelOrder: false,
-
     orderItems: req.body.orderItems,
     shippingAddress: {
       province: req.body.shippingAddress?.province || "",
@@ -47,47 +40,36 @@ export const createPayment = asyncHandler(async (req, res) => {
     name: req.body.name,
     user: req.body.user,
   });
-  console.log(order);
-
   order.save();
 
   let vnpUrl = url;
   const date = new Date();
-
+  let ipAddr = "127.0.0.1";
   const createDate = dateFormat(date, "yyyymmddHHmmss");
   const orderId = order._id.toString();
-  console.log({ orderId });
-  // var orderId = dateFormat(date, 'HHmmss');
-
-  var locale = "vn";
-  var currCode = "VND";
   var vnp_Params = {};
   vnp_Params["vnp_Version"] = "2.1.0";
   vnp_Params["vnp_Command"] = "pay";
   vnp_Params["vnp_TmnCode"] = tmnCode;
-  vnp_Params["vnp_Locale"] = locale;
-  vnp_Params["vnp_CurrCode"] = currCode;
+  vnp_Params["vnp_Locale"] = "vn";
+  vnp_Params["vnp_CurrCode"] = "VND";
   vnp_Params["vnp_TxnRef"] = orderId;
-  vnp_Params["vnp_OrderInfo"] = "DEMO";
-  vnp_Params["vnp_OrderType"] = "billpayment";
-  vnp_Params["vnp_Amount"] = 1000 * 100;
+  vnp_Params["vnp_OrderInfo"] = "Test";
+  vnp_Params["vnp_OrderType"] = "topup";
+  vnp_Params["vnp_Amount"] = req.body.totalPrice * 100;
   vnp_Params["vnp_ReturnUrl"] = returnUrl;
   vnp_Params["vnp_IpAddr"] = ipAddr;
   vnp_Params["vnp_CreateDate"] = createDate;
   vnp_Params["vnp_BankCode"] = "Ncb";
 
   vnp_Params = sortObject(vnp_Params);
-
-  var signData =
-    secretKey + querystring.stringify(vnp_Params, { encode: false });
-
-  var secureHash = sha256(signData);
-
-  vnp_Params["vnp_SecureHashType"] = "SHA256";
-  vnp_Params["vnp_SecureHash"] = secureHash;
+  var signData = querystring.stringify(vnp_Params, { encode: false });
+  var hmac = crypto.createHmac("sha512", secretKey);
+  var signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
+  vnp_Params["vnp_SecureHash"] = signed;
   vnpUrl += "?" + querystring.stringify(vnp_Params, { encode: false });
-  console.log({ code: "00", data: vnpUrl });
-  console.log(vnp_Params);
+
+  console.log(vnpUrl);
   res.status(200).json({ code: "00", data: vnpUrl });
 });
 
@@ -161,21 +143,18 @@ export const inpPayment = async (req, res) => {
   }
 };
 
-function sortObject(o) {
-  var sorted = {},
-    key,
-    a = [];
-
-  for (key in o) {
-    if (o.hasOwnProperty(key)) {
-      a.push(key);
+function sortObject(obj) {
+  let sorted = {};
+  let str = [];
+  let key;
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      str.push(encodeURIComponent(key));
     }
   }
-
-  a.sort();
-
-  for (key = 0; key < a.length; key++) {
-    sorted[a[key]] = o[a[key]];
+  str.sort();
+  for (key = 0; key < str.length; key++) {
+    sorted[str[key]] = encodeURIComponent(obj[str[key]]).replace(/%20/g, "+");
   }
   return sorted;
 }
