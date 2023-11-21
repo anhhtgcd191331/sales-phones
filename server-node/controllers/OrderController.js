@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import OrderModel from "../models/OrderModel.js";
+import axios from "axios";
 
 const GetAllOrder = asyncHandler(async (req, res) => {
   try {
@@ -77,40 +78,51 @@ const clientCancelOrder = asyncHandler(async (req, res) => {
 const updateOrder = asyncHandler(async (req, res) => {
   try {
     const updateOrder = await OrderModel.findById({ _id: req.params.id });
+    let items = [];
     if (updateOrder) {
-      let items = [];
-      updateOrder.orderItems.map((x) => {
-        let item = {};
-        item.name = x.name;
-        item.quantity = parseInt(x.qty);
-        item.price = x.salePrice;
-
-        items.push(item);
+      items = updateOrder.orderItems?.map((x) => {
+        return {
+          name: x.name,
+          code: "phonedemo",
+          quantity: parseInt(x.qty),
+          price: x.salePrice,
+          weight: 12,
+          length: 12,
+          width: 12,
+          height: 1200,
+          category: {
+            level1: "phone",
+          },
+        };
       });
     }
+
+    console.log(items);
+
     const orderGhn = {
       payment_type_id: 2,
-      note: "Tintest 123",
-      from_name: "Tin",
-      from_phone: "0705944385",
-      from_address: "123 Đường 3/2",
-      from_ward_name: "Phường 5",
-      from_district_name: "Quận 11",
-      from_province_name: "TP Hồ Chí Minh",
+      note: "Demo test",
       required_note: "KHONGCHOXEMHANG",
+      from_name: "Tien Anh",
+      from_phone: "0705944385",
+      from_address: "K1050 Ngo Quyen",
+      from_ward_name: "An Hải Bắc",
+      from_district_name: "Sơn Trà",
+      from_province_name: "DN",
       return_name: "Hoang Tien Anh",
       return_phone: "0705944385",
       return_address: "K1050 Ngo Quyen",
+      return_district_id: null,
+      return_ward_code: "",
+      client_order_code: "",
       return_ward_name: "An Hai Bac",
       return_district_name: "Quận Sơn Tra",
-      return_province_name: "TP Da Nang",
-      client_order_code: "",
+      return_province_name: "DN",
       to_name: updateOrder.name,
       to_phone: updateOrder.shippingAddress.phone,
       to_address: `${updateOrder.shippingAddress.province}, ${updateOrder.shippingAddress.district}, ${updateOrder.shippingAddress.ward}, ${updateOrder.shippingAddress.detail}`,
-      to_ward_name: updateOrder.shippingAddress.ward,
-      to_district_name: updateOrder.shippingAddress.district,
-      to_province_name: updateOrder.shippingAddress.province,
+      to_ward_code: "20308",
+      to_district_id: 1444,
       cod_amount:
         updateOrder.paymentMethod === "payOnline" ? 0 : updateOrder.totalPrice,
       content: "Theo New York Times",
@@ -121,35 +133,44 @@ const updateOrder = asyncHandler(async (req, res) => {
       cod_failed_amount: 2000,
       pick_station_id: 1444,
       deliver_station_id: null,
-      insurance_value: 10000000,
+      insurance_value: 10,
       service_id: 0,
       service_type_id: 2,
       coupon: null,
       pick_shift: null,
       pickup_time: 1665272576,
+      pick_shift: [2],
       items: items,
     };
-    updateOrder.order_code = req.params.id;
-    await updateOrder.save();
-    res.send(updateOrder);
-    const { data } = await axios.post(
-      "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create",
-      orderGhn,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          shop_id: process.env.SHOP_ID,
-          token: process.env.TOKEN_GHN,
-        },
-      }
-    );
-    console.log({ data });
+    const headers = {
+      "Content-Type": "application/json",
+      ShopId: "4405018",
+      Token: "4203512c-2ec6-11ee-a59f-a260851ba65c",
+    };
 
-    const order_code = data.data.order_code;
+    const requestOptions = {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(orderGhn),
+    };
 
+    const data = fetch(
+      "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/create",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        return data;
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+
+    const order_code = data.order_code;
     updateOrder.order_code = order_code;
     await updateOrder.save();
-    res.json(updateOrder);
+    res.json(data);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

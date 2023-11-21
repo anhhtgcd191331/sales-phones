@@ -23,7 +23,7 @@ import { admin, protect } from "../middlewares/Auth.js";
 const OrderRouter = express.Router();
 
 OrderRouter.post("/create", protect, createOrder);
-OrderRouter.post("/update/:id", protect, updateOrder);
+OrderRouter.post("/update/:id", updateOrder);
 OrderRouter.post("/cancel/:id", clientCancelOrder);
 OrderRouter.get("/print/:id", PrintOrderGhn);
 OrderRouter.put("/shipping/:id", ShippingProduct);
